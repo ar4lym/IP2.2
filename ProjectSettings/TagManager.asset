@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Anchor
   - Dirty_Bench
+  - Clue
+  - PlayerHand
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - PlayerHand
   - 
   - 
   - 
