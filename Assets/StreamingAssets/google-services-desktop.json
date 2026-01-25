@@ -1,22 +1,21 @@
 {
   "project_info": {
-    "project_number": "724817517035",
-    "firebase_url": "https://dda-2025-5454f-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "dda-2025-5454f",
-    "storage_bucket": "dda-2025-5454f.firebasestorage.app"
+    "project_number": "640331920773",
+    "project_id": "ip22vr",
+    "storage_bucket": "ip22vr.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:724817517035:android:4c280536a62debbabee1ae",
+        "mobilesdk_app_id": "1:640331920773:android:2b2de12394cac185c740ec",
         "android_client_info": {
-          "package_name": "sg.edu.s10267170"
+          "package_name": "ip.proj22"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDVROMBVA7MrzWH3ZvypGbZK8UmMhviIA0"
+          "current_key": "AIzaSyDSvjaAH-yhsY9KZwRAN4Hlanr2JooiW2g"
         }
       ],
       "services": {
