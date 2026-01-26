@@ -62,7 +62,7 @@ Material:
     m_Colors:
     - _Basecolor: {r: 0.16264686, g: 0.4056604, b: 0.38921586, a: 1}
     - _normalSpeed: {r: 1, g: 0.2, b: 0, a: 0}
-    - _voronoiColor: {r: 0.14373443, g: 0.16245402, b: 0.4481132, a: 1}
+    - _voronoiColor: {r: 0.22376733, g: 0.24094798, b: 0.5330188, a: 1}
     - _voronoiSpeed: {r: 0, g: 7, b: 0, a: 0}
     - _voronoiTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
