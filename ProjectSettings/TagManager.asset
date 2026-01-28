@@ -8,6 +8,9 @@ TagManager:
   - Dirty_Bench
   - Clue
   - PlayerHand
+  - Clue 1
+  - Clue 2
+  - Clue 3
   layers:
   - Default
   - TransparentFX
