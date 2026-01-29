@@ -1,10 +1,31 @@
-// using TMPro;
-// using UnityEngine;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 // using Firebase.Auth;
 // using Firebase.Extensions;
 
-// public class LoginPanelManager : MonoBehaviour
-// {
+ public class Login : MonoBehaviour
+{
+    public TMP_InputField username;
+    public TMP_InputField password;
+    public TMP_Text message;
+
+
+
+    public void Loggingin()
+    {
+        if (username.text == "123" && password.text == "123")
+        {
+           message.text = ("Login Successful");
+           Debug.Log("Login Successful");
+           SceneManager.LoadScene("BasicScene");
+        }
+        else
+        {
+           message.text = ("Invalid username or password");
+        }
+    }
+}
 //     [SerializeField]
 //     private TMP_Text title;
 //     [SerializeField]
