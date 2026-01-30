@@ -31,10 +31,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        ShowLogin();
-    }
+    // void Start()
+    // {
+    //     ShowLogin();
+    // }
 
     // public void ShowGame()
     // {
