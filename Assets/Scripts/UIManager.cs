@@ -1,16 +1,59 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static UIManager Instance;
+
+    public GameObject UImanager;
+
+    void start()
     {
-        
+        ShowSignup();
+    }
+    // [SerializeField]
+    // private GameObject gamePanel;
+    [SerializeField]
+    private GameObject loginPanel;
+    [SerializeField]
+    private GameObject signupPanel;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        ShowLogin();
+    }
+
+    // public void ShowGame()
+    // {
+    //     gamePanel.SetActive(true);
+    //     loginPanel.SetActive(false);
+    //     signupPanel.SetActive(false);
+    // }
+
+    public void ShowLogin()
+    {
+        //gamePanel.SetActive(false);
+        loginPanel.SetActive(true);
+        signupPanel.SetActive(false);
+    }
+
+    public void ShowSignup()
+    {
+        //gamePanel.SetActive(false);
+        loginPanel.SetActive(false);
+        signupPanel.SetActive(true);
     }
 }
