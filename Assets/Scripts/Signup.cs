@@ -116,7 +116,7 @@ public class Signup : MonoBehaviour
 
             if (task.IsCompleted)
             {
-                Debug.Log("User created successfully! Navigating to Third Page!");
+                Debug.Log("User created successfully!");
                 //uiManager.ShowThirdPage(); // Navigate to ThirdPage if it works
                 var uid = task.Result.User.UserId; //Retrieves the unique Firebase user ID
                 Debug.Log($"Created user UID: {uid}");

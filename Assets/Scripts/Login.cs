@@ -144,7 +144,7 @@ public class Login : MonoBehaviour
 
             if (task.IsCompleted)
             {
-                Debug.Log("User logged in successfully! Navigating to Third Page!");
+                Debug.Log("User logged in successfully!");
                 //uiManager.ShowThirdPage(); // Navigate to ThirdPage
                 var uid = task.Result.User.UserId;
                 Debug.Log($"Logged in user UID: {uid}");
