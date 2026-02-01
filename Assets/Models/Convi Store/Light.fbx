@@ -16,9 +16,9 @@ FBXHeaderExtension:  {
 		Month: 2
 		Day: 1
 		Hour: 18
-		Minute: 5
-		Second: 38
-		Millisecond: 327
+		Minute: 1
+		Second: 39
+		Millisecond: 563
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.3.6"
 }
@@ -41,9 +41,9 @@ References:  {
 
 Definitions:  {
 	Version: 100
-	Count: 5
+	Count: 6
 	ObjectType: "Model" {
-		Count: 2
+		Count: 3
 	}
 	ObjectType: "Material" {
 		Count: 1
@@ -143,6 +143,90 @@ Objects:  {
 		Culling: "CullingOff"
 		TypeFlags: "Null"
 		NodeAttributeName: "NodeAttribute::Supermarket_ncl1_1"
+	}
+	Model: "Model::Lights_GRP", "Null" {
+		Version: 232
+		Properties60:  {
+			Property: "QuaternionInterpolate", "enum", "",0
+			Property: "RotationOffset", "Vector3D", "",0,0,0
+			Property: "RotationPivot", "Vector3D", "",-6.07820129394531,446.385330200195,1.89306640625
+			Property: "ScalingOffset", "Vector3D", "",0,0,0
+			Property: "ScalingPivot", "Vector3D", "",-6.07820129394531,446.385330200195,1.89306640625
+			Property: "TranslationActive", "bool", "",0
+			Property: "TranslationMin", "Vector3D", "",0,0,0
+			Property: "TranslationMax", "Vector3D", "",0,0,0
+			Property: "TranslationMinX", "bool", "",0
+			Property: "TranslationMinY", "bool", "",0
+			Property: "TranslationMinZ", "bool", "",0
+			Property: "TranslationMaxX", "bool", "",0
+			Property: "TranslationMaxY", "bool", "",0
+			Property: "TranslationMaxZ", "bool", "",0
+			Property: "RotationOrder", "enum", "",0
+			Property: "RotationSpaceForLimitOnly", "bool", "",0
+			Property: "RotationStiffnessX", "double", "",0
+			Property: "RotationStiffnessY", "double", "",0
+			Property: "RotationStiffnessZ", "double", "",0
+			Property: "AxisLen", "double", "",10
+			Property: "PreRotation", "Vector3D", "",0,0,0
+			Property: "PostRotation", "Vector3D", "",0,0,0
+			Property: "RotationActive", "bool", "",1
+			Property: "RotationMin", "Vector3D", "",0,0,0
+			Property: "RotationMax", "Vector3D", "",0,0,0
+			Property: "RotationMinX", "bool", "",0
+			Property: "RotationMinY", "bool", "",0
+			Property: "RotationMinZ", "bool", "",0
+			Property: "RotationMaxX", "bool", "",0
+			Property: "RotationMaxY", "bool", "",0
+			Property: "RotationMaxZ", "bool", "",0
+			Property: "InheritType", "enum", "",1
+			Property: "ScalingActive", "bool", "",0
+			Property: "ScalingMin", "Vector3D", "",0,0,0
+			Property: "ScalingMax", "Vector3D", "",0,0,0
+			Property: "ScalingMinX", "bool", "",0
+			Property: "ScalingMinY", "bool", "",0
+			Property: "ScalingMinZ", "bool", "",0
+			Property: "ScalingMaxX", "bool", "",0
+			Property: "ScalingMaxY", "bool", "",0
+			Property: "ScalingMaxZ", "bool", "",0
+			Property: "GeometricTranslation", "Vector3D", "",0,0,0
+			Property: "GeometricRotation", "Vector3D", "",0,0,0
+			Property: "GeometricScaling", "Vector3D", "",1,1,1
+			Property: "MinDampRangeX", "double", "",0
+			Property: "MinDampRangeY", "double", "",0
+			Property: "MinDampRangeZ", "double", "",0
+			Property: "MaxDampRangeX", "double", "",0
+			Property: "MaxDampRangeY", "double", "",0
+			Property: "MaxDampRangeZ", "double", "",0
+			Property: "MinDampStrengthX", "double", "",0
+			Property: "MinDampStrengthY", "double", "",0
+			Property: "MinDampStrengthZ", "double", "",0
+			Property: "MaxDampStrengthX", "double", "",0
+			Property: "MaxDampStrengthY", "double", "",0
+			Property: "MaxDampStrengthZ", "double", "",0
+			Property: "PreferedAngleX", "double", "",0
+			Property: "PreferedAngleY", "double", "",0
+			Property: "PreferedAngleZ", "double", "",0
+			Property: "LookAtProperty", "object", ""
+			Property: "UpVectorProperty", "object", ""
+			Property: "Show", "bool", "",1
+			Property: "NegativePercentShapeSupport", "bool", "",1
+			Property: "DefaultAttributeIndex", "int", "",0
+			Property: "Freeze", "bool", "",0
+			Property: "LODBox", "bool", "",0
+			Property: "Lcl Translation", "Lcl Translation", "A",0,0,0
+			Property: "Lcl Rotation", "Lcl Rotation", "A",0,0,0
+			Property: "Lcl Scaling", "Lcl Scaling", "A",1,1,1
+			Property: "Visibility", "Visibility", "A",1
+			Property: "Color", "ColorRGB", "N",0.8,0.8,0.8
+			Property: "Size", "double", "N",100
+			Property: "Look", "enum", "N",0
+		}
+		MultiLayer: 0
+		MultiTake: 0
+		Shading: Y
+		Culling: "CullingOff"
+		TypeFlags: "Null"
+		NodeAttributeName: "NodeAttribute::Lights_GRP_ncl1_1"
 	}
 	Model: "Model::lights", "Mesh" {
 		Version: 232
@@ -302,13 +386,13 @@ Objects:  {
 			Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "Original|ApplicationName", "KString", "", "Maya"
 			Property: "Original|ApplicationVersion", "KString", "", "2025"
-			Property: "Original|DateTime_GMT", "DateTime", "", "01/02/2026 10:05:38.325"
+			Property: "Original|DateTime_GMT", "DateTime", "", "01/02/2026 10:01:39.558"
 			Property: "Original|FileName", "KString", "", "C:\Users\MingHui\Documents\NP Y2 Sem 2\IP_2.2\IP2.2_FBXs\Light.fbx"
 			Property: "LastSaved", "Compound", ""
 			Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "LastSaved|ApplicationName", "KString", "", "Maya"
 			Property: "LastSaved|ApplicationVersion", "KString", "", "2025"
-			Property: "LastSaved|DateTime_GMT", "DateTime", "", "01/02/2026 10:05:38.325"
+			Property: "LastSaved|DateTime_GMT", "DateTime", "", "01/02/2026 10:01:39.558"
 			Property: "Original|ApplicationActiveProject", "KString", "", "C:\Users\MingHui\Documents\NP Y2 Sem 2\IP_2.2\IP2.2_FBXs"
              
 			Property: "Original|ApplicationNativeFile", "KString", "", "C:\Users\MingHui\Documents\NP Y2 Sem 2\IP_2.2\Supermarket_IP\scenes\convi_store.ma"
@@ -381,7 +465,8 @@ Objects:  {
 
 Connections:  {
 	Connect: "OO", "Model::Supermarket", "Model::Scene"
-	Connect: "OO", "Model::lights", "Model::Supermarket"
+	Connect: "OO", "Model::Lights_GRP", "Model::Supermarket"
+	Connect: "OO", "Model::lights", "Model::Lights_GRP"
 	Connect: "OO", "Material::blinn1", "Model::lights"
 }
 ;Takes and animation section
