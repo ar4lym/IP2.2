@@ -21,7 +21,7 @@ public class Tiles : MonoBehaviour
             {
                 other.transform.position = spawnPoint.position;
                 Debug.Log("Teleporting to: " + spawnPoint.position);
-                lava.Play();
+                //lava.Play();
 
                 if (rb != null)
                 {
