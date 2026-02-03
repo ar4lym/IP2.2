@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using UnityEngine.Networking;
+using Firebase.Database;
+using System;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -9,29 +9,27 @@ public class SceneLoader : MonoBehaviour
 
     public void Sceneloader()
     {
+        // Load the scene
         SceneManager.LoadScene(sceneName);
-        StartCoroutine(SendSceneData(sceneName));
+
+        // Log to Firebase
+        LogSceneEntry(sceneName);
     }
 
-    private IEnumerator SendSceneData(string scene)
+    private void LogSceneEntry(string scene)
     {
-        string url = "https://yourserver.com/api/scene"; // Replace with your backend endpoint
-        WWWForm form = new WWWForm();
-        form.AddField("sceneName", scene);
-        form.AddField("timestamp", System.DateTime.UtcNow.ToString("o"));
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
+        string entryId = reference.Child("sceneEntries").Push().Key;
+        var entryData = new SceneEntry
         {
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Error sending scene data: " + www.error);
-            }
-            else
-            {
-                Debug.Log("Scene data sent successfully!");
-            }
-        }
+            sceneName = scene,
+            timestamp = DateTime.UtcNow.ToString("o")
+        };
+        Debug.Log($"Logging scene entry: {entryData.sceneName} at {entryData.timestamp}");
+        
+        string json = JsonUtility.ToJson(entryData);
+        reference.Child("sceneEntries").Child(entryId).SetRawJsonValueAsync(json);
     }
 }
+
