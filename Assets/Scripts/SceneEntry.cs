@@ -6,4 +6,5 @@ public class SceneEntry
 {
   public string sceneName;
   public string timestamp;
+  public string DateTime;
 }
