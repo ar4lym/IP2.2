@@ -24,6 +24,46 @@ public class WaterPuddle : MonoBehaviour
 }
 */
 
+
+// public class WaterPuddle : MonoBehaviour
+// {
+//     public float cleanTimeRequired = 3f;
+
+//     private float currentCleanTime = 0f;
+//     private bool isCleaned = false;
+
+//     private void OnTriggerStay(Collider other)
+//     {
+//         if (isCleaned) return;
+
+//         MopController mop = other.GetComponentInParent<MopController>();
+
+//         if (mop != null && mop.IsHeld)
+//         {
+//             currentCleanTime += Time.deltaTime;
+//             Debug.Log("Mopping... " + currentCleanTime.ToString("F2"));
+
+//             if (currentCleanTime >= cleanTimeRequired)
+//             {
+//                 CleanWater();
+//             }
+//         }
+//     }
+
+//     private void OnTriggerExit(Collider other)
+//     {
+//         // Reset progress if mop leaves the water
+//         currentCleanTime = 0f;
+//         Debug.Log("Mopping interrupted, timer reset");
+//     }
+
+//     private void CleanWater()
+//     {
+//         isCleaned = true;
+//         Debug.Log("Water cleaned!");
+//         Destroy(gameObject);
+//     }
+// }
 public class WaterPuddle : MonoBehaviour
 {
     public float cleanTimeRequired = 3f;
@@ -40,6 +80,7 @@ public class WaterPuddle : MonoBehaviour
         if (mop != null && mop.IsHeld)
         {
             currentCleanTime += Time.deltaTime;
+
             Debug.Log("Mopping... " + currentCleanTime.ToString("F2"));
 
             if (currentCleanTime >= cleanTimeRequired)
@@ -51,15 +92,21 @@ public class WaterPuddle : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // Reset progress if mop leaves the water
-        currentCleanTime = 0f;
-        Debug.Log("Mopping interrupted, timer reset");
+        // ONLY reset if the mop leaves
+        MopController mop = other.GetComponentInParent<MopController>();
+
+        if (mop != null)
+        {
+            currentCleanTime = 0f;
+            Debug.Log("Mopping interrupted, timer reset");
+        }
     }
 
     private void CleanWater()
     {
         isCleaned = true;
         Debug.Log("Water cleaned!");
+        //scrubSound.Stop();
         Destroy(gameObject);
     }
 }
