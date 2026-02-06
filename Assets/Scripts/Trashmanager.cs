@@ -6,13 +6,14 @@ public class Trashmanager : MonoBehaviour
     public static Trashmanager Instance;
 
     public int totalTrash = 5;
-    public int totalPuddles = 0;
+    // public int totalPuddles = 0;
 
     private int trashCollected = 0;
-    private int puddlesCleaned = 0;
+    // private int puddlesCleaned = 0;
 
     public TextMeshProUGUI trashCounterText;
-    public GameObject levelCompleteUI;
+    public TextMeshProUGUI CounterText;
+    //public GameObject levelCompleteUI;
 
     private void Awake()
     {
@@ -22,38 +23,38 @@ public class Trashmanager : MonoBehaviour
     private void Start()
     {
         UpdateTrashUI();
-        levelCompleteUI.SetActive(false);
+        //levelCompleteUI.SetActive(false);
     }
 
     public void TrashCollected()
     {
         trashCollected++;
         UpdateTrashUI();
-        CheckCompletion();
+        //CheckCompletion();
     }
 
-    public void PuddleCleaned()
-    {
-        puddlesCleaned++;
-        CheckCompletion();
-    }
+    // public void PuddleCleaned()
+    // {
+    //     puddlesCleaned++;
+    //     //CheckCompletion();
+    // }
 
     void UpdateTrashUI()
     {
         trashCounterText.text = trashCollected + " / " + totalTrash;
     }
 
-    void CheckCompletion()
-    {
-        if (trashCollected >= totalTrash && puddlesCleaned >= totalPuddles)
-        {
-            LevelComplete();
-        }
-    }
+    // void CheckCompletion()
+    // {
+    //     if (trashCollected >= totalTrash && puddlesCleaned >= totalPuddles)
+    //     {
+    //         LevelComplete();
+    //     }
+    // }
 
-    void LevelComplete()
-    {
-        Debug.Log("LEVEL COMPLETE");
-        levelCompleteUI.SetActive(true);
-    }
+    // void LevelComplete()
+    // {
+    //     Debug.Log("LEVEL COMPLETE");
+    //     levelCompleteUI.SetActive(true);
+    // }
 }
