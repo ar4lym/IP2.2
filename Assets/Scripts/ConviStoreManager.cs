@@ -1,11 +1,15 @@
+/// <summary>
+/// ConviStoreManager.cs
+/// This script manages the item arrangement progress in the convenience store level.
+/// It tracks the number of items correctly placed into sockets and updates the UI accordingly.
+/// </summary>
+/// <author> Leong Ming Hui </author>
+/// <date> 06/02/2026 </date>
+/// <StudentID> S10267664J </StudentID>
+
 using TMPro;
 using UnityEngine;
-/// <summary>
-/// Author: Leong Ming Hui
-/// Date: 6/2/26
-/// Description:
-/// Tracks how many items have been correctly arranged in the Convenience Store and updates the UI text .
-/// </summary>
+
 public class ConviStoreManager : MonoBehaviour
 {
     /// <summary>Total number of items needed</summary>
