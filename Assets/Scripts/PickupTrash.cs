@@ -12,6 +12,6 @@ public class PickupTrash : MonoBehaviour
 
         Trashmanager.Instance.TrashCollected();
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
