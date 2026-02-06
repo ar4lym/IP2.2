@@ -4,7 +4,7 @@ public class Throwtrash : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Trash trash = other.GetComponent<Trash>();
+        PickupTrash trash = other.GetComponent<PickupTrash>();
 
         if (trash != null)
         {
