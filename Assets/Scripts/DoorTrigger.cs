@@ -10,23 +10,40 @@ public class DoorTrigger : MonoBehaviour
     [Header("Task Flags")]
     public bool allTasksDone = false;    // Set this based on your game logic
 
+    // This runs when the scene starts
+    private void Start()
+    {
+        // Hide both UI elements at the start
+        if (optionsPanel != null)
+            optionsPanel.SetActive(false);
+
+        if (taskPrompt != null)
+            taskPrompt.gameObject.SetActive(false);
+    }
+
     // Call this when the player interacts with the door
     public void OnPlayerInteract()
     {
         if (allTasksDone)
         {
-            // Show the 4 options for places to move
+            // Show options panel and hide task prompt
             if (optionsPanel != null)
                 optionsPanel.SetActive(true);
+
+            if (taskPrompt != null)
+                taskPrompt.gameObject.SetActive(false);
         }
         else
         {
-            // Show prompt to complete tasks
+            // Show task prompt and hide options panel
             if (taskPrompt != null)
             {
-                taskPrompt.text = "You must complete all tasks first!";
+                taskPrompt.text = "Complete tasks first!";
                 taskPrompt.gameObject.SetActive(true);
             }
+
+            if (optionsPanel != null)
+                optionsPanel.SetActive(false);
         }
     }
 }
