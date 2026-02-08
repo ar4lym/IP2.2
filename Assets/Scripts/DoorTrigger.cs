@@ -10,36 +10,52 @@ public class DoorTrigger : MonoBehaviour
     [Header("Task Flags")]
     public bool allTasksDone = false;    // Set this based on your game logic
 
-    // This runs when the scene starts
     private void Start()
     {
         // Hide both UI elements at the start
         if (optionsPanel != null)
             optionsPanel.SetActive(false);
+        else
+            Debug.LogWarning("DoorTrigger: optionsPanel not assigned!");
 
         if (taskPrompt != null)
             taskPrompt.gameObject.SetActive(false);
+        else
+            Debug.LogWarning("DoorTrigger: taskPrompt not assigned!");
     }
 
     // Call this when the player interacts with the door
     public void OnPlayerInteract()
     {
+        Debug.Log("Door interacted! allTasksDone = " + allTasksDone);
+
+        // Safety checks before using UI
         if (allTasksDone)
         {
-            // Show options panel and hide task prompt
             if (optionsPanel != null)
+            {
                 optionsPanel.SetActive(true);
+                Debug.Log("Options panel shown.");
+            }
+            else
+            {
+                Debug.LogError("Cannot show optionsPanel — it is not assigned!");
+            }
 
             if (taskPrompt != null)
                 taskPrompt.gameObject.SetActive(false);
         }
         else
         {
-            // Show task prompt and hide options panel
             if (taskPrompt != null)
             {
                 taskPrompt.text = "Complete tasks first!";
                 taskPrompt.gameObject.SetActive(true);
+                Debug.Log("Task prompt shown.");
+            }
+            else
+            {
+                Debug.LogError("Cannot show taskPrompt — it is not assigned!");
             }
 
             if (optionsPanel != null)
