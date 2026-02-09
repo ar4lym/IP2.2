@@ -12,8 +12,8 @@ public class ScannableObject : MonoBehaviour
 
     public GameObject objectDestory; // assign the info panel to show after scan
     
-    public GameObject infoPanel; // assign the info panel to show after scan
-    public GameObject infoPanel; // assign the info panel to show after scan
+    public GameObject clue1; // assign the info clue1 to show after scan
+    public GameObject clue2; // assign the info clue2 to show after scan
      
 
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
@@ -81,6 +81,8 @@ public class ScannableObject : MonoBehaviour
         hasBeenScanned = true;
         ResetScanUI();
         infoPanel.SetActive(true);
+        clue1.SetActive(true);
+        clue2.SetActive(true);
         objectDestory.SetActive(false);
     }
 
