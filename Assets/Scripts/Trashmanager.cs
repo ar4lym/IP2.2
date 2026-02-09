@@ -12,7 +12,6 @@ public class Trashmanager : MonoBehaviour
     // private int puddlesCleaned = 0;
 
     public TextMeshProUGUI trashCounterText;
-    public TextMeshProUGUI CounterText;
     //public GameObject levelCompleteUI;
 
     private void Awake()
@@ -25,6 +24,12 @@ public class Trashmanager : MonoBehaviour
         UpdateTrashUI();
         //levelCompleteUI.SetActive(false);
     }
+
+    public int GetCollectedTrash()
+    {
+        return trashCollected;
+    }
+
 
     public void TrashCollected()
     {

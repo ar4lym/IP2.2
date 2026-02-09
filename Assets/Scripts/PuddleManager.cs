@@ -22,6 +22,12 @@ public class PuddleManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    public int GetCleanedPuddles()
+    {
+        return puddlesCleaned;
+    }
+
+
     // private void Start()
     // {
     //     UpdatePuddleUI();               // Initialize puddle counter
@@ -43,6 +49,7 @@ public class PuddleManager : MonoBehaviour
         if (puddleCounterText != null)
             puddleCounterText.text = puddlesCleaned + " / " + totalPuddles;
     }
+
 
     // Optional: check if all puddles are cleaned
     // private void CheckCompletion()
