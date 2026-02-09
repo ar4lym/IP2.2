@@ -4,7 +4,7 @@ using Unity.XR.CoreUtils;
 
 public class ParkTP : MonoBehaviour
 {
-
+    [SerializeField] private string sceneName;
 
     public void LoadNextScene()
     {
@@ -14,7 +14,7 @@ public class ParkTP : MonoBehaviour
         if (trash == 5 && puddles == 3)
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(sceneName);
         }
         else
         {

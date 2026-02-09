@@ -13,7 +13,7 @@ public class DatabaseManager : MonoBehaviour
     public TMP_InputField DisplayInput;
 
     public static DatabaseManager Instance;
-    public string DisplayName;
+    public string userName;
 
     void Awake()
     {
@@ -52,14 +52,6 @@ public class DatabaseManager : MonoBehaviour
         string email = EmailInput.text.Trim();
         string password = PasswordInput.text.Trim();
 
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-        {
-            Debug.LogError("Email or password is empty");
-            return;
-        }
-
-        Debug.Log($"Signing up with email: '{email}'");
-
         FirebaseAuth.DefaultInstance
             .CreateUserWithEmailAndPasswordAsync(email, password)
             .ContinueWithOnMainThread(task =>
@@ -70,17 +62,24 @@ public class DatabaseManager : MonoBehaviour
                     return;
                 }
 
-                Debug.Log($"User created: {task.Result.User.UserId}");
+                var user = task.Result.User;
 
-                // Create user node in database
                 FirebaseDatabase.DefaultInstance
                     .RootReference
                     .Child("players")
-                    .Child(task.Result.User.UserId)
-                    .Child("displayName")
+                    .Child(user.UserId)
+                    .Child("email")
+                    .SetValueAsync(user.Email);
+
+                FirebaseDatabase.DefaultInstance
+                    .RootReference
+                    .Child("players")
+                    .Child(user.UserId)
+                    .Child("userName")
                     .SetValueAsync(DisplayInput.text.Trim());
             });
     }
+
 
     public void SignIn()
     {
@@ -126,7 +125,7 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-    public void SetDisplayName(string displayName, Action<string> onError, Action onSuccess)
+    public void SetUserName(string userName, Action<string> onError, Action onSuccess)
     {
         if (!IsAuthenticated())
         {
@@ -138,8 +137,8 @@ public class DatabaseManager : MonoBehaviour
             .RootReference
             .Child("players")
             .Child(CurrentUserId())
-            .Child("displayName")
-            .SetValueAsync(displayName)
+            .Child("userName")
+            .SetValueAsync(userName)
             .ContinueWithOnMainThread(task =>
             {
                 if (task.IsFaulted || task.IsCanceled)
@@ -153,7 +152,7 @@ public class DatabaseManager : MonoBehaviour
             });
     }
 
-    public void GetDisplayName()
+    public void GetUserName()
     {
         if (!IsAuthenticated())
         {
@@ -165,7 +164,7 @@ public class DatabaseManager : MonoBehaviour
             .RootReference
             .Child("players")
             .Child(CurrentUserId())
-            .Child("displayName")
+            .Child("userName")
             .GetValueAsync()
             .ContinueWithOnMainThread(task =>
             {
@@ -177,8 +176,8 @@ public class DatabaseManager : MonoBehaviour
 
                 if (task.Result.Exists)
                 {
-                    DisplayName = task.Result.Value.ToString();
-                    Debug.Log("Display name: " + DisplayName);
+                    userName = task.Result.Value.ToString();
+                    Debug.Log("Display name: " + userName);
                 }
             });
     }
