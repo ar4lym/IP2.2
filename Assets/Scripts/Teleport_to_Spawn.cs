@@ -19,6 +19,8 @@ public class TeleportToSpawn : MonoBehaviour
 
         if (characterController != null)
             characterController.enabled = true;
+    Debug.Log("Triggered by tile: " + gameObject.name);
+
     }
 }
 
