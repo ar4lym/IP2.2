@@ -12,6 +12,9 @@ public class SceneLoader : MonoBehaviour
         // Load the scene
         SceneManager.LoadScene(sceneName);
 
+        // Teleport in  scene
+        SceneManager.LoadScene(sceneName);
+
         // Log to Firebase
         LogSceneEntry(sceneName);
     }
