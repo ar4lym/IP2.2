@@ -29,6 +29,10 @@ public class ConviStoreManager : MonoBehaviour
     private void Start()
     {
         UpdateUI();
+        if (completeUI != null)
+        {
+            completeUI.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -39,12 +43,15 @@ public class ConviStoreManager : MonoBehaviour
         itemsArranged++;
         UpdateUI();
 
+
         if (itemsArranged == totalItems)
         {
+            completeUI.SetActive(true);
             timer.StopTimer();
         }
     }
 
+    
     /// <summary>
     /// Updates the progress UI text
     /// </summary>
