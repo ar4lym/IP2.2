@@ -40,6 +40,10 @@ public class ConviStoreManager : MonoBehaviour
     /// </summary>
     public void AddItem()
     {
+
+        if (itemsArranged >= totalItems)
+        return;
+        
         itemsArranged++;
         UpdateUI();
 
