@@ -1,22 +1,22 @@
 {
   "project_info": {
-    "project_number": "640331920773",
-    "firebase_url": "https://ip22vr-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "ip22vr",
-    "storage_bucket": "ip22vr.firebasestorage.app"
+    "project_number": "510811662952",
+    "firebase_url": "https://bumble-studio-c4a23-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bumble-studio-c4a23",
+    "storage_bucket": "bumble-studio-c4a23.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:640331920773:android:2b2de12394cac185c740ec",
+        "mobilesdk_app_id": "1:510811662952:android:320013762d26b7e01d69dd",
         "android_client_info": {
-          "package_name": "ip.proj22"
+          "package_name": "com.np.bumblestudios2026"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDSvjaAH-yhsY9KZwRAN4Hlanr2JooiW2g"
+          "current_key": "AIzaSyCYrIZ7gLEK-NSn1v--71tog6pAAlPUjV0"
         }
       ],
       "services": {

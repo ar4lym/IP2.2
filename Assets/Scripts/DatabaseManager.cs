@@ -1,10 +1,11 @@
-using System;
-using Firebase;
-using Firebase.Auth;
-using Firebase.Database;
-using Firebase.Extensions;
 using UnityEngine;
+using Firebase.Database;
+using System.Collections.Generic;
+using Firebase.Extensions;
 using TMPro;
+using Firebase.Auth;
+using Firebase;
+using System;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -14,20 +15,6 @@ public class DatabaseManager : MonoBehaviour
 
     public static DatabaseManager Instance;
     public string userName;
-
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
 
     void Start()
     {
@@ -180,21 +167,5 @@ public class DatabaseManager : MonoBehaviour
                     Debug.Log("Display name: " + userName);
                 }
             });
-    }
-
-    public void UpdateScore(float score)
-    {
-        if (!IsAuthenticated())
-        {
-            Debug.LogError("User not logged in");
-            return;
-        }
-
-        FirebaseDatabase.DefaultInstance
-            .RootReference
-            .Child("players")
-            .Child(CurrentUserId())
-            .Child("score")
-            .SetValueAsync(score);
     }
 }
