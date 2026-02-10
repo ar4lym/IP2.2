@@ -12,14 +12,19 @@ using UnityEngine;
 
 public class ConviStoreManager : MonoBehaviour
 {
-    /// <summary>Total number of items needed</summary>
+    // Total number of items needed to be arranged
     public int totalItems = 10;
 
-    /// <summary>Current number of arranged items</summary>
+    // Current number of arranged items
     private int itemsArranged = 0;
 
-    /// <summary>UI text displaying progress</summary>
+    // UI text displaying progress
     public TextMeshProUGUI storeProgressText;
+
+    public Timer timer;
+
+    public GameObject completeUI; 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -33,6 +38,11 @@ public class ConviStoreManager : MonoBehaviour
     {
         itemsArranged++;
         UpdateUI();
+
+        if (itemsArranged == totalItems)
+        {
+            timer.StopTimer();
+        }
     }
 
     /// <summary>
