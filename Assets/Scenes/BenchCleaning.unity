@@ -18162,6 +18162,9 @@ MonoBehaviour:
   benchesToClean: 10
   countText: {fileID: 140031}
   completionUI: {fileID: 871064128}
+  ocdPopupPanel: {fileID: 1217392573}
+  popupDuration: 3.5
+  timer: {fileID: 1983406067}
 --- !u!1001 &194763468
 PrefabInstance:
   m_ObjectHideFlags: 0
