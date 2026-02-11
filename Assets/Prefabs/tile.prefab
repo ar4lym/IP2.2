@@ -52,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.01377072, y: 0.002015246, z: 0.01377073}
+  m_Size: {x: 0.008, y: 0.003, z: 0.008}
   m_Center: {x: 0, y: 0.001007623, z: 0.00000000349246}
 --- !u!114 &1916624552732741711
 MonoBehaviour:
@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 0}
+  teleportDelay: 0.3
 --- !u!1 &3226734192534888837
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.01, y: 0.002, z: 0.01}
+  m_Size: {x: 0.005, y: 0.003, z: 0.005}
   m_Center: {x: 0, y: 0.0010076233, z: 0.0000000034924597}
 --- !u!114 &1652785260200753240
 MonoBehaviour:

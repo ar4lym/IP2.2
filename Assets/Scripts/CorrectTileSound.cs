@@ -1,40 +1,34 @@
 using UnityEngine;
 
-public class PlaySoundOnTrigger : MonoBehaviour
+public class TileLandingSFX : MonoBehaviour
 {
-    public AudioClip clip;
+    public AudioClip landingClip;
     [Range(0f, 1f)] public float volume = 1f;
-    public bool playOnceUntilExit = true;
 
-    private bool played = false;
+    private bool hasPlayed = false;
 
     private void OnTriggerEnter(Collider other)
     {
         Transform rig = other.transform.root;
+
         if (!rig.CompareTag("Player")) return;
 
-        Debug.Log("Sound trigger fired on: " + transform.root.name);
-
-        if (clip == null)
+        if (landingClip == null)
         {
-            Debug.LogError("No clip assigned on PlaySoundOnTrigger.");
+            Debug.LogWarning("No landingClip assigned!");
             return;
         }
 
-        if (playOnceUntilExit && played) return;
+        if (hasPlayed) return;
 
-        // Guaranteed playback without needing an AudioSource component
-        AudioSource.PlayClipAtPoint(clip, transform.position, volume);
-        played = true;
+        AudioSource.PlayClipAtPoint(landingClip, transform.position, volume);
+        hasPlayed = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Transform rig = other.transform.root;
-        if (!rig.CompareTag("Player")) return;
+        if (!other.transform.root.CompareTag("Player")) return;
 
-        played = false;
+        hasPlayed = false;
     }
 }
-
-
