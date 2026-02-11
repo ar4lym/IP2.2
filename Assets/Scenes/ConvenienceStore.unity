@@ -163801,6 +163801,8 @@ MonoBehaviour:
   storeProgressText: {fileID: 2006818981}
   timer: {fileID: 304696735}
   completeUI: {fileID: 199079353}
+  wrongItemUI: {fileID: 748785995}
+  wrongUIShowSeconds: 1.5
   audioManager: {fileID: 1911635119}
 --- !u!4 &1775041118
 Transform:

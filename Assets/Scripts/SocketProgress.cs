@@ -38,9 +38,10 @@ public class SocketProgress : MonoBehaviour
         else
         {
             audioSource.PlayOneShot(wrongSFX);
+            storeManager.ShowWrongItemUI();
 
         }
     }
 
-    
+
 }
