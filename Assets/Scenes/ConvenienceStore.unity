@@ -32040,6 +32040,7 @@ GameObject:
   - component: {fileID: 321585706}
   - component: {fileID: 321585705}
   - component: {fileID: 321585709}
+  - component: {fileID: 321585710}
   m_Layer: 0
   m_Name: REDpringles_socket (1)
   m_TagString: Untagged
@@ -32079,18 +32080,6 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 321585709}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
@@ -32098,6 +32087,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 321585710}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -32260,6 +32261,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &321585710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321585704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!4 &321957379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4372454282238235215, guid: 2fa11cf2f46eb4042926b0742851acd2, type: 3}
@@ -113087,6 +113101,7 @@ GameObject:
   - component: {fileID: 1281931235}
   - component: {fileID: 1281931234}
   - component: {fileID: 1281931237}
+  - component: {fileID: 1281931238}
   m_Layer: 0
   m_Name: MeijiBiscuit_socket
   m_TagString: Untagged
@@ -113126,25 +113141,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1281931237}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1281931238}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -113299,6 +113314,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1281931238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281931233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1001 &1281975837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121326,6 +121354,7 @@ GameObject:
   - component: {fileID: 1395701454}
   - component: {fileID: 1395701453}
   - component: {fileID: 1395701457}
+  - component: {fileID: 1395701458}
   m_Layer: 0
   m_Name: GREENpringles_socket (1)
   m_TagString: Untagged
@@ -121365,25 +121394,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1395701457}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1395701458}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -121546,6 +121575,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1395701458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395701452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1001 &1396024767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121709,6 +121751,7 @@ GameObject:
   - component: {fileID: 1396902156}
   - component: {fileID: 1396902155}
   - component: {fileID: 1396902158}
+  - component: {fileID: 1396902159}
   m_Layer: 0
   m_Name: Hershey_socket
   m_TagString: Untagged
@@ -121748,25 +121791,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1396902158}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1396902159}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -121921,6 +121964,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1396902159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396902154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1001 &1397326300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124389,6 +124445,7 @@ GameObject:
   - component: {fileID: 1432691094}
   - component: {fileID: 1432691093}
   - component: {fileID: 1432691097}
+  - component: {fileID: 1432691098}
   m_Layer: 0
   m_Name: ShinRam_socket
   m_TagString: Untagged
@@ -124428,25 +124485,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1432691097}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1432691098}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -124601,6 +124658,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1432691098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432691092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1001 &1435289983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129602,6 +129672,7 @@ GameObject:
   - component: {fileID: 1493266296}
   - component: {fileID: 1493266295}
   - component: {fileID: 1493266299}
+  - component: {fileID: 1493266300}
   m_Layer: 0
   m_Name: PreggoSauce_socket
   m_TagString: Untagged
@@ -129641,25 +129712,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1493266299}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1493266300}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -129822,6 +129893,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1493266300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493266294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1 &1493542379
 GameObject:
   m_ObjectHideFlags: 0
@@ -146975,6 +147059,7 @@ GameObject:
   - component: {fileID: 1629008542}
   - component: {fileID: 1629008541}
   - component: {fileID: 1629008545}
+  - component: {fileID: 1629008546}
   m_Layer: 0
   m_Name: CupNoodles_socket
   m_TagString: Untagged
@@ -147014,25 +147099,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1629008545}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1629008546}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -147187,6 +147272,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1629008546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629008540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1001 &1630388247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177644,6 +177742,7 @@ GameObject:
   - component: {fileID: 1903931672}
   - component: {fileID: 1903931677}
   - component: {fileID: 1903931678}
+  - component: {fileID: 1903931679}
   m_Layer: 0
   m_Name: GREENpringles_socket
   m_TagString: Untagged
@@ -177727,25 +177826,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1903931678}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1903931679}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -177864,6 +177963,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1903931679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903931671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!4 &1904558118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5725096161293509837, guid: 34e2edb6d168fbb49944c4f9ee46ddfd, type: 3}
@@ -181975,6 +182087,7 @@ GameObject:
   - component: {fileID: 1959760780}
   - component: {fileID: 1959760779}
   - component: {fileID: 1959760783}
+  - component: {fileID: 1959760784}
   m_Layer: 0
   m_Name: REDpringles_socket
   m_TagString: Untagged
@@ -182014,25 +182127,25 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 321585709}
+      - m_Target: {fileID: 1959760783}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1959760784}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -182195,6 +182308,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1959760784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959760778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1001 &1959775387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187872,6 +187998,7 @@ GameObject:
   - component: {fileID: 2038948960}
   - component: {fileID: 2038948959}
   - component: {fileID: 2038948963}
+  - component: {fileID: 2038948964}
   m_Layer: 0
   m_Name: CHEESEpringles_socket
   m_TagString: Untagged
@@ -187911,18 +188038,6 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775041117}
-        m_TargetAssemblyTypeName: ConviStoreManager, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2038948963}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
@@ -187930,6 +188045,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 8389e14ddffb435488fd92125e81500f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2038948964}
+        m_TargetAssemblyTypeName: SocketProgress, Assembly-CSharp
+        m_MethodName: OnItemPlaced
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -188092,6 +188219,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2038948964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038948958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressManager: {fileID: 1775041117}
 --- !u!1001 &2039032981
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,16 +1,16 @@
-// using UnityEngine;
+using UnityEngine;
 
-// public class SocketProgress : MonoBehaviour
-// {
-//     // Start is called once before the first execution of Update after the MonoBehaviour is created
-//     public ConviStoreManager progressManager;
-//     private bool isCompleted = false;
+public class SocketProgress : MonoBehaviour
+{
 
-//     public void OnItemPlaced()
-//     {
-//         if (isCompleted) return;
+     public ConviStoreManager progressManager;
+     private bool isCompleted = false;
 
-//         isCompleted = true;
-//         progressManager.AddItem();
-//     }
-// }
+     public void OnItemPlaced()
+     {
+         if (isCompleted) return;
+
+         isCompleted = true;
+         progressManager.AddItem();
+     }
+}
