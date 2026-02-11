@@ -23,7 +23,9 @@ public class ConviStoreManager : MonoBehaviour
 
     public Timer timer;
 
-    public GameObject completeUI; 
+    public GameObject completeUI;
+
+    public BGMManager audioManager; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -52,6 +54,7 @@ public class ConviStoreManager : MonoBehaviour
         {
             completeUI.SetActive(true);
             timer.StopTimer();
+            audioManager.OnTaskCompleted();
         }
     }
 
