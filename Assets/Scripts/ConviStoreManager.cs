@@ -9,6 +9,7 @@
 
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class ConviStoreManager : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class ConviStoreManager : MonoBehaviour
 
     public GameObject completeUI;
 
+    public GameObject wrongItemUI;
+    public float wrongUIShowSeconds = 1.5f;
+
+    private Coroutine wrongUICoroutine;
+
     public BGMManager audioManager; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,6 +40,11 @@ public class ConviStoreManager : MonoBehaviour
         if (completeUI != null)
         {
             completeUI.SetActive(false);
+        }
+
+        if (wrongItemUI != null)
+        {
+            wrongItemUI.SetActive(false);
         }
     }
 
@@ -65,5 +76,24 @@ public class ConviStoreManager : MonoBehaviour
     private void UpdateUI()
     {
         storeProgressText.text = $"Items arranged: {itemsArranged} / {totalItems}";
+    }
+
+    public void ShowWrongItemUI()
+    {
+        if (wrongItemUI == null) return;
+
+        // restart timer if player keeps doing wrong placements
+        if (wrongUICoroutine != null)
+            StopCoroutine(wrongUICoroutine);
+
+        wrongItemUI.SetActive(true);
+        wrongUICoroutine = StartCoroutine(HideWrongUIAfterDelay());
+    }
+
+    private IEnumerator HideWrongUIAfterDelay()
+    {
+        yield return new WaitForSeconds(wrongUIShowSeconds);
+        wrongItemUI.SetActive(false);
+        wrongUICoroutine = null;
     }
 }

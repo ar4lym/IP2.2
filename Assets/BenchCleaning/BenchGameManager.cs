@@ -66,7 +66,12 @@ public class BenchGameManager : MonoBehaviour
     public GameObject completionUI;
     public GameObject ocdPopupPanel; 
     public float popupDuration = 2f;
-    public Timer timer; 
+    public Timer timer;
+
+    public AudioSource completionSound;  
+    public AudioSource bgmSource;        
+
+    private bool gameCompleted = false;  // to prevent double trigger
 
     void Awake()
     {
@@ -89,6 +94,8 @@ public class BenchGameManager : MonoBehaviour
 
     public void BenchCleaned()
     {
+        if (gameCompleted) return;
+
         benchesCleaned++;
         UpdateUI();
 
@@ -101,13 +108,20 @@ public class BenchGameManager : MonoBehaviour
         // When all benches are cleaned
         if (benchesCleaned >= benchesToClean)
         {
+            gameCompleted = true;
+
             ShowCompletionUI();
 
-            // To stop timer 
+            // Play completion sound
+            if (completionSound != null)
+                completionSound.Play();
+
+            // To stop background music
+            if (bgmSource != null)
+                bgmSource.Stop();
+
             if (timer != null)
-            {
                 timer.StopTimer();
-            }
         }
     }
 
