@@ -11,6 +11,14 @@ TagManager:
   - Clue 1
   - Clue 2
   - Clue 3
+  - CheesePringle
+  - CupNoodle
+  - ShinRam
+  - Biscuit
+  - Sauce
+  - RedPringle
+  - GreenPringle
+  - Hershey
   layers:
   - Default
   - TransparentFX
