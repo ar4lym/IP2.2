@@ -73311,7 +73311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &871064129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -163229,7 +163229,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3869ef4db80489047a1ffd76d5fe60d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressManager: {fileID: 0}
+  correctItemTag: 
+  storeManager: {fileID: 0}
+  audioSource: {fileID: 0}
+  correctSFX: {fileID: 0}
+  wrongSFX: {fileID: 0}
+  blinkDuration: 0.15
+  wrongColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &1775118916
 PrefabInstance:
   m_ObjectHideFlags: 0
