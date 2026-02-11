@@ -3,32 +3,31 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class SprayCleaner : MonoBehaviour
 {
-    public float sprayDistance = 2f;   // How far the spray reaches
-    public float cleanRate = 30f;      // How fast the dirt is cleaned
+    public float sprayDistance = 2f;
+    public float cleanRate = 30f;
 
     public Transform sprayPoint;
-
     public ParticleSystem sprayFX;
+
+    public AudioSource spraySound;  
 
     private XRGrabInteractable grab;
 
     void Awake()
     {
         grab = GetComponent<XRGrabInteractable>();
+
         if (grab == null)
-        {
             Debug.LogError("XRGrabInteractable missing on Bottle!");
-        }
 
         if (sprayPoint == null)
-        {
-            Debug.LogError("SprayPoint is NOT assigned. Assign it manually in the Inspector.");
-        }
+            Debug.LogError("SprayPoint is NOT assigned.");
 
         if (sprayFX == null)
-        {
-            Debug.LogWarning("SprayFX not assigned. Spray will still work but no visuals.");
-        }
+            Debug.LogWarning("SprayFX not assigned.");
+
+        if (spraySound == null)
+            Debug.LogWarning("SpraySound not assigned.");
     }
 
     void Update()
@@ -47,10 +46,14 @@ public class SprayCleaner : MonoBehaviour
     {
         if (sprayPoint == null) return;
 
+        // Play spray particles
         if (sprayFX != null && !sprayFX.isPlaying)
             sprayFX.Play();
 
-        // Debug ray to confirm direction
+        // Play spraying sound
+        if (spraySound != null && !spraySound.isPlaying)
+            spraySound.Play();
+
         Debug.DrawRay(
             sprayPoint.position,
             sprayPoint.forward * sprayDistance,
@@ -76,5 +79,9 @@ public class SprayCleaner : MonoBehaviour
     {
         if (sprayFX != null && sprayFX.isPlaying)
             sprayFX.Stop();
+
+        // to Stop spraying sound
+        if (spraySound != null && spraySound.isPlaying)
+            spraySound.Stop();
     }
 }
