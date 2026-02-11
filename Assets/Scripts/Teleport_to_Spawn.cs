@@ -1,26 +1,47 @@
 using UnityEngine;
+using System.Collections;
 
 public class TeleportToSpawn : MonoBehaviour
 {
     public Transform spawnPoint;
+    public float teleportDelay = 0.3f;
+
+    private bool armed = true;
+    private bool teleporting = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        Transform rigTransform = other.transform.root;
+        if (!armed || teleporting) return;
 
-        if (!rigTransform.CompareTag("Player"))
-            return;
+        Transform rig = other.transform.root;
+        if (!rig.CompareTag("Player")) return;
 
-        var characterController = rigTransform.GetComponent<CharacterController>();
-        if (characterController != null)
-            characterController.enabled = false;
+        StartCoroutine(TeleportPlayer(rig));
+    }
 
-        rigTransform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+    private IEnumerator TeleportPlayer(Transform rig)
+    {
+        armed = false;
+        teleporting = true;
 
-        if (characterController != null)
-            characterController.enabled = true;
-    Debug.Log("Triggered by tile: " + gameObject.name);
+        yield return new WaitForSeconds(teleportDelay);
 
+        var cc = rig.GetComponent<CharacterController>();
+        if (cc != null) cc.enabled = false;
+
+        rig.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+        if (cc != null) cc.enabled = true;
+
+        teleporting = false;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Transform rig = other.transform.root;
+        if (!rig.CompareTag("Player")) return;
+
+        armed = true; // only re-arm when fully stepped off
+        Debug.Log("Triggered from: " + transform.root.name);
     }
 }
-
