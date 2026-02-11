@@ -1,3 +1,46 @@
+// using UnityEngine;
+// using TMPro;
+
+// public class PuddleManager : MonoBehaviour
+// {
+//     public static PuddleManager Instance;
+
+//     [Header("Puddles")]
+//     public int totalPuddles = 5;      // Total puddles in scene
+//     private int puddlesCleaned = 0;   // How many have been cleaned
+
+//     [Header("UI")]
+//     public TextMeshProUGUI puddleCounterText; // Assign TMP text in Inspector
+
+//     private void Awake()
+//     {
+//         // Singleton pattern
+//         if (Instance == null)
+//             Instance = this;
+//         else
+//             Destroy(gameObject);
+//     }
+
+//     public int GetCleanedPuddles()
+//     {
+//         return puddlesCleaned;
+//     }
+
+//     // Call this when a puddle is cleaned
+//     public void PuddleCleaned()
+//     {
+//         puddlesCleaned++;
+//         UpdatePuddleUI();
+//     }
+
+//     // Updates the TMP text
+//     private void UpdatePuddleUI()
+//     {
+//         if (puddleCounterText != null)
+//             puddleCounterText.text = puddlesCleaned + " / " + totalPuddles;
+//     }
+// }
+
 using UnityEngine;
 using TMPro;
 
@@ -6,20 +49,25 @@ public class PuddleManager : MonoBehaviour
     public static PuddleManager Instance;
 
     [Header("Puddles")]
-    public int totalPuddles = 5;      // Total puddles in scene
-    private int puddlesCleaned = 0;   // How many have been cleaned
+    public int totalPuddles = 5;
+    private int puddlesCleaned = 0;
+
+    public bool puddlesCompleted = false;   // ✅ completion flag
 
     [Header("UI")]
-    public TextMeshProUGUI puddleCounterText; // Assign TMP text in Inspector
-    // public GameObject levelCompleteUI;        // Optional, shows when all puddles cleaned
+    public TextMeshProUGUI puddleCounterText;
 
     private void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        UpdatePuddleUI();
     }
 
     public int GetCleanedPuddles()
@@ -27,38 +75,28 @@ public class PuddleManager : MonoBehaviour
         return puddlesCleaned;
     }
 
-
-    // private void Start()
-    // {
-    //     UpdatePuddleUI();               // Initialize puddle counter
-    //     if (levelCompleteUI != null)
-    //         levelCompleteUI.SetActive(false);
-    // }
-
     // Call this when a puddle is cleaned
     public void PuddleCleaned()
     {
         puddlesCleaned++;
         UpdatePuddleUI();
-        //CheckCompletion();
+
+        // ✅ Mark puddles done
+        if (puddlesCleaned >= totalPuddles)
+        {
+            puddlesCompleted = true;
+            Debug.Log("Puddles completed!");
+
+            // 🔗 Ask TrashManager to check AND condition
+            if (Trashmanager.Instance != null)
+                Trashmanager.Instance.TryStopTimer();
+        }
     }
 
-    // Updates the TMP text
+    // Updates UI
     private void UpdatePuddleUI()
     {
         if (puddleCounterText != null)
             puddleCounterText.text = puddlesCleaned + " / " + totalPuddles;
     }
-
-
-    // Optional: check if all puddles are cleaned
-    // private void CheckCompletion()
-    // {
-    //     if (puddlesCleaned >= totalPuddles)
-    //     {
-    //         Debug.Log("ALL PUDDLES CLEANED!");
-    //         if (levelCompleteUI != null)
-    //             levelCompleteUI.SetActive(true);
-    //     }
-    // }
 }

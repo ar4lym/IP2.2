@@ -1,3 +1,46 @@
+// using UnityEngine;
+// using TMPro;
+
+// public class Trashmanager : MonoBehaviour
+// {
+//     public static Trashmanager Instance;
+
+//     public int totalTrash = 5;
+
+//     private int trashCollected = 0;
+
+//     public TextMeshProUGUI trashCounterText;
+
+//     private void Awake()
+//     {
+//         Instance = this;
+//     }
+
+//     private void Start()
+//     {
+//         UpdateTrashUI();
+//     }
+
+//     public int GetCollectedTrash()
+//     {
+//         return trashCollected;
+//     }
+
+
+//     public void TrashCollected()
+//     {
+//         trashCollected++;
+//         UpdateTrashUI();
+//     }
+
+
+//     void UpdateTrashUI()
+//     {
+//         trashCounterText.text = trashCollected + " / " + totalTrash;
+//     }
+// }
+
+
 using UnityEngine;
 using TMPro;
 
@@ -5,14 +48,18 @@ public class Trashmanager : MonoBehaviour
 {
     public static Trashmanager Instance;
 
+    [Header("Trash Settings")]
     public int totalTrash = 5;
-    // public int totalPuddles = 0;
 
     private int trashCollected = 0;
-    // private int puddlesCleaned = 0;
+    public bool trashCompleted = false;   // completion flag
 
+    [Header("UI")]
     public TextMeshProUGUI trashCounterText;
-    //public GameObject levelCompleteUI;
+
+    [Header("Other Systems")]
+    public PuddleManager puddleManager;   // drag PuddleManager here
+    public Timer timer;                   // drag Timer here
 
     private void Awake()
     {
@@ -22,7 +69,6 @@ public class Trashmanager : MonoBehaviour
     private void Start()
     {
         UpdateTrashUI();
-        //levelCompleteUI.SetActive(false);
     }
 
     public int GetCollectedTrash()
@@ -30,36 +76,43 @@ public class Trashmanager : MonoBehaviour
         return trashCollected;
     }
 
-
     public void TrashCollected()
     {
         trashCollected++;
         UpdateTrashUI();
-        //CheckCompletion();
+
+        // Mark trash done
+        if (trashCollected >= totalTrash)
+        {
+            trashCompleted = true;
+            Debug.Log("Trash completed!");
+            TryStopTimer();
+        }
     }
 
-    // public void PuddleCleaned()
-    // {
-    //     puddlesCleaned++;
-    //     //CheckCompletion();
-    // }
+    // AND condition lives here (clean & simple)
+    public void TryStopTimer()
+    {
+        if (puddleManager == null)
+        {
+            Debug.LogWarning("PuddleManager not assigned!");
+            return;
+        }
+
+        if (trashCompleted && puddleManager.puddlesCompleted)
+        {
+            Debug.Log("All tasks done — stopping timer");
+
+            if (timer != null)
+                timer.StopTimer();
+            else
+                Debug.LogWarning("Timer not assigned!");
+        }
+    }
 
     void UpdateTrashUI()
     {
-        trashCounterText.text = trashCollected + " / " + totalTrash;
+        if (trashCounterText != null)
+            trashCounterText.text = trashCollected + " / " + totalTrash;
     }
-
-    // void CheckCompletion()
-    // {
-    //     if (trashCollected >= totalTrash && puddlesCleaned >= totalPuddles)
-    //     {
-    //         LevelComplete();
-    //     }
-    // }
-
-    // void LevelComplete()
-    // {
-    //     Debug.Log("LEVEL COMPLETE");
-    //     levelCompleteUI.SetActive(true);
-    // }
 }

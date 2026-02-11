@@ -59,6 +59,7 @@ public class Timer : MonoBehaviour
     {
         enabled = false; // stops Update
         SaveBestTime(elapsedTime);
+        Debug.Log("Timer.StopTimer() called!");
     }
 
     private void SaveBestTime(float timeSpent)
