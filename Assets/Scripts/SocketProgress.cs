@@ -15,9 +15,6 @@ public class SocketProgress : MonoBehaviour
     public AudioClip correctSFX;
     public AudioClip wrongSFX;
 
-    [Header("Visual Feedback")]
-    public float blinkDuration = 0.15f;
-    public Color wrongColor = Color.red;
 
     private bool counted = false;
 
@@ -41,20 +38,9 @@ public class SocketProgress : MonoBehaviour
         else
         {
             audioSource.PlayOneShot(wrongSFX);
-            StartCoroutine(BlinkWrongItem(placedItem));
+
         }
     }
 
-    private IEnumerator BlinkWrongItem(GameObject item)
-    {
-        Renderer rend = item.GetComponentInChildren<Renderer>();
-        if (rend == null) yield break;
-
-        Color originalColor = rend.material.color;
-        rend.material.color = wrongColor;
-
-        yield return new WaitForSeconds(blinkDuration);
-
-        rend.material.color = originalColor;
-    }
+    
 }
