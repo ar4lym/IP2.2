@@ -1,5 +1,3 @@
-using UnityEngine;
-
 // public class Dirt : MonoBehaviour
 // {
 //     public float dirtAmount = 100f;
@@ -16,11 +14,14 @@ using UnityEngine;
 // }
 
 
+using UnityEngine;
+
 public class Dirt : MonoBehaviour
 {
     public float dirtAmount = 100f;
     private bool isCleaned = false;
 
+    public AudioSource cleanSound;   
     public void Clean(float amount)
     {
         if (isCleaned) return;
@@ -30,6 +31,10 @@ public class Dirt : MonoBehaviour
         if (dirtAmount <= 0)
         {
             isCleaned = true;
+
+            // to play bench cleaned sound
+            if (cleanSound != null)
+                cleanSound.Play();
 
             BenchGameManager.Instance.BenchCleaned();
 
