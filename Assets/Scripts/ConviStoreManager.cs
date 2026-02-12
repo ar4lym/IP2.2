@@ -13,30 +13,32 @@ using System.Collections;
 
 public class ConviStoreManager : MonoBehaviour
 {
+    [Header("Item Settings")]
     // Total number of items needed to be arranged
     public int totalItems = 10;
 
     // Current number of arranged items
     private int itemsArranged = 0;
 
+    [Header("UI References")]
     // UI text displaying progress
     public TextMeshProUGUI storeProgressText;
-
-    public Timer timer;
-
     public GameObject completeUI;
-
     public GameObject wrongItemUI;
     public float wrongUIShowSeconds = 1.5f;
 
-    private Coroutine wrongUICoroutine;
+    [Header("Manager References")]
+    public Timer timer;
+    public BGMManager audioManager;
 
-    public BGMManager audioManager; 
+    private Coroutine wrongUICoroutine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        // Initialize UI
         UpdateUI();
+        
         if (completeUI != null)
         {
             completeUI.SetActive(false);
@@ -46,6 +48,22 @@ public class ConviStoreManager : MonoBehaviour
         {
             wrongItemUI.SetActive(false);
         }
+
+        // Verify Timer is assigned
+        if (timer == null)
+        {
+            Debug.LogError("Timer reference is not assigned in ConviStoreManager!");
+        }
+        else
+        {
+            Debug.Log("ConviStoreManager: Timer is running");
+        }
+
+        // Verify BGMManager is assigned
+        if (audioManager == null)
+        {
+            Debug.LogWarning("BGMManager reference is not assigned in ConviStoreManager!");
+        }
     }
 
     /// <summary>
@@ -53,47 +71,141 @@ public class ConviStoreManager : MonoBehaviour
     /// </summary>
     public void AddItem()
     {
-
+        // Prevent adding items beyond the total
         if (itemsArranged >= totalItems)
-        return;
+        {
+            Debug.LogWarning("Cannot add more items - already at max!");
+            return;
+        }
         
         itemsArranged++;
+        Debug.Log($"Item arranged! Progress: {itemsArranged}/{totalItems}");
         UpdateUI();
 
+        // Check if all items are arranged
+        if (itemsArranged >= totalItems)
+        {
+            OnAllItemsCompleted();
+        }
+    }
 
-        if (itemsArranged == totalItems)
+    /// <summary>
+    /// Called when all items have been successfully arranged
+    /// </summary>
+    private void OnAllItemsCompleted()
+    {
+        Debug.Log("All items arranged! Task completed!");
+
+        // Show completion UI
+        if (completeUI != null)
         {
             completeUI.SetActive(true);
+        }
+
+        // Stop the timer and save the time
+        if (timer != null)
+        {
             timer.StopTimer();
+            float finalTime = timer.GetElapsedTime();
+            Debug.Log($"Task completed in {finalTime} seconds");
+        }
+        else
+        {
+            Debug.LogError("Timer reference is missing - cannot stop timer!");
+        }
+
+        // Play completion audio
+        if (audioManager != null)
+        {
             audioManager.OnTaskCompleted();
         }
     }
 
-    
     /// <summary>
     /// Updates the progress UI text
     /// </summary>
     private void UpdateUI()
     {
-        storeProgressText.text = $"Items arranged: {itemsArranged} / {totalItems}";
+        if (storeProgressText != null)
+        {
+            storeProgressText.text = $"Items arranged: {itemsArranged} / {totalItems}";
+        }
+        else
+        {
+            Debug.LogWarning("Store progress text is not assigned!");
+        }
     }
 
+    /// <summary>
+    /// Shows the wrong item UI temporarily
+    /// </summary>
     public void ShowWrongItemUI()
     {
-        if (wrongItemUI == null) return;
+        if (wrongItemUI == null)
+        {
+            Debug.LogWarning("Wrong item UI is not assigned!");
+            return;
+        }
 
-        // restart timer if player keeps doing wrong placements
+        // Restart timer if player keeps doing wrong placements
         if (wrongUICoroutine != null)
+        {
             StopCoroutine(wrongUICoroutine);
+        }
 
         wrongItemUI.SetActive(true);
         wrongUICoroutine = StartCoroutine(HideWrongUIAfterDelay());
     }
 
+    /// <summary>
+    /// Hides the wrong item UI after a delay
+    /// </summary>
     private IEnumerator HideWrongUIAfterDelay()
     {
         yield return new WaitForSeconds(wrongUIShowSeconds);
-        wrongItemUI.SetActive(false);
+        
+        if (wrongItemUI != null)
+        {
+            wrongItemUI.SetActive(false);
+        }
+        
         wrongUICoroutine = null;
+    }
+
+    /// <summary>
+    /// Public method to get current progress
+    /// </summary>
+    public int GetItemsArranged()
+    {
+        return itemsArranged;
+    }
+
+    /// <summary>
+    /// Public method to check if task is completed
+    /// </summary>
+    public bool IsCompleted()
+    {
+        return itemsArranged >= totalItems;
+    }
+
+    /// <summary>
+    /// Optional: Reset the manager (for testing or retrying)
+    /// </summary>
+    public void ResetProgress()
+    {
+        itemsArranged = 0;
+        UpdateUI();
+        
+        if (completeUI != null)
+        {
+            completeUI.SetActive(false);
+        }
+        
+        if (wrongItemUI != null)
+        {
+            wrongItemUI.SetActive(false);
+        }
+        
+        Debug.Log("ConviStoreManager progress reset");
     }
 }

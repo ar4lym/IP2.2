@@ -12,7 +12,6 @@ using TMPro;
 using Firebase.Database;
 using Firebase.Auth;
 using System;
-using System.Collections.Generic;
 
 public class Timer : MonoBehaviour
 {
@@ -26,10 +25,22 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        dbRef = FirebaseDatabase.DefaultInstance.RootReference;
+        // Initialize Firebase references
         auth = FirebaseAuth.DefaultInstance;
+        dbRef = FirebaseDatabase.DefaultInstance.RootReference;
+        
         elapsedTime = 0f;
         isPaused = false;
+
+        // Verify authentication on start
+        if (auth.CurrentUser == null)
+        {
+            Debug.LogError("No user is currently logged in!");
+        }
+        else
+        {
+            Debug.Log($"Timer started for user: {auth.CurrentUser.UserId}");
+        }
     }
 
     void Update()
@@ -59,45 +70,114 @@ public class Timer : MonoBehaviour
     {
         enabled = false; // stops Update
         SaveBestTime(elapsedTime);
-        Debug.Log("Timer.StopTimer() called!");
+        Debug.Log($"Timer.StopTimer() called! Final time: {elapsedTime}s");
     }
 
     private void SaveBestTime(float timeSpent)
     {
-        string userId = AuthManager.Instance.GetUserId();
-        if (string.IsNullOrEmpty(userId))
+        // Check if user is authenticated
+        if (auth == null || auth.CurrentUser == null)
         {
-            Debug.LogError("No user logged in!");
+            Debug.LogError("Cannot save time: No user logged in!");
             return;
         }
 
-        DatabaseReference sceneRef = dbRef.Child("players").Child(userId).Child("sceneEntries").Child(sceneName);
-
-        sceneRef.RunTransaction(mutableData =>
+        string userId = auth.CurrentUser.UserId;
+        
+        if (string.IsNullOrEmpty(userId))
         {
-            var dict = mutableData.Value as Dictionary<string, object>;
-            if (dict == null)
-            {
-                dict = new Dictionary<string, object>();
-                dict["bestTime"] = timeSpent;
-                dict["entryCount"] = 1;
-            }
-            else
-            {
-                float oldBest = Convert.ToSingle(dict["bestTime"]);
-                int oldCount = Convert.ToInt32(dict["entryCount"]);
+            Debug.LogError("User ID is null or empty!");
+            return;
+        }
 
-                if (timeSpent < oldBest)
+        if (string.IsNullOrEmpty(sceneName))
+        {
+            Debug.LogError("Scene name is not set!");
+            return;
+        }
+
+        Debug.Log($"Saving time for user {userId} in scene {sceneName}");
+
+        DatabaseReference sceneRef = dbRef
+            .Child("players")
+            .Child(userId)
+            .Child("sceneEntries")
+            .Child(sceneName);
+
+        // First, get the current data
+        sceneRef.GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError($"Failed to read data: {task.Exception}");
+                return;
+            }
+
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                SceneEntryData entryData;
+
+                if (snapshot.Exists)
                 {
-                    dict["bestTime"] = timeSpent;
+                    // Parse existing data
+                    try
+                    {
+                        string json = snapshot.GetRawJsonValue();
+                        entryData = JsonUtility.FromJson<SceneEntryData>(json);
+                        
+                        // Update best time if current time is better
+                        if (timeSpent < entryData.bestTime)
+                        {
+                            entryData.bestTime = timeSpent;
+                            Debug.Log($"New best time: {timeSpent}s (previous: {entryData.bestTime}s)");
+                        }
+                        else
+                        {
+                            Debug.Log($"Time {timeSpent}s did not beat best time of {entryData.bestTime}s");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError($"Error parsing existing data: {e.Message}");
+                        entryData = new SceneEntryData();
+                        entryData.bestTime = timeSpent;
+                    }
+                }
+                else
+                {
+                    // No existing data, create new entry
+                    entryData = new SceneEntryData();
+                    entryData.bestTime = timeSpent;
+                    Debug.Log($"First entry for this scene. Time: {timeSpent}s");
                 }
 
-                dict["entryCount"] = oldCount + 1;
+                // Save the updated data
+                string jsonData = JsonUtility.ToJson(entryData);
+                sceneRef.SetRawJsonValueAsync(jsonData).ContinueWith(saveTask =>
+                {
+                    if (saveTask.IsFaulted)
+                    {
+                        Debug.LogError($"Failed to save data: {saveTask.Exception}");
+                    }
+                    else if (saveTask.IsCompleted)
+                    {
+                        Debug.Log($"Successfully saved time data for scene: {sceneName}");
+                    }
+                });
             }
-
-            dict["lastTimestamp"] = DateTime.UtcNow.ToString("o");
-            mutableData.Value = dict;
-            return TransactionResult.Success(mutableData);
         });
+    }
+
+    // Public method to get current elapsed time
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
+
+    // Public method to check if timer is paused
+    public bool IsPaused()
+    {
+        return isPaused;
     }
 }
