@@ -16,9 +16,12 @@ public class DatabaseManager : MonoBehaviour
     public static DatabaseManager Instance;
     public string userName;
 
+    public GameObject mainCanvas;
+
     void Start()
     {
-        // REQUIRED: Firebase init
+        mainCanvas.SetActive(false);   // hide before login
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Result == DependencyStatus.Available)
@@ -50,6 +53,7 @@ public class DatabaseManager : MonoBehaviour
                 }
 
                 var user = task.Result.User;
+                mainCanvas.SetActive(true);
 
                 FirebaseDatabase.DefaultInstance
                     .RootReference
@@ -82,17 +86,19 @@ public class DatabaseManager : MonoBehaviour
         Debug.Log($"Signing in with email: '{email}'");
 
         FirebaseAuth.DefaultInstance
-            .SignInWithEmailAndPasswordAsync(email, password)
-            .ContinueWithOnMainThread(task =>
+        .SignInWithEmailAndPasswordAsync(email, password)
+        .ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
             {
-                if (task.IsFaulted || task.IsCanceled)
-                {
-                    Debug.LogError(task.Exception);
-                    return;
-                }
+                Debug.LogError(task.Exception);
+                return;
+            }
 
-                Debug.Log($"User logged in: {task.Result.User.UserId}");
-            });
+            Debug.Log($"User logged in: {task.Result.User.UserId}");
+
+            mainCanvas.SetActive(true);
+        });
     }
 
     public void SignOut()
