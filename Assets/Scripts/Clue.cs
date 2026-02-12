@@ -1,39 +1,21 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.XR.Interaction.Toolkit;  // required for XR events
 
-public class Clue : MonoBehaviour {
-    public TextMeshProUGUI clueText;   // assign in Inspector
-    private bool clueFound = false;
+public class Clue : MonoBehaviour
+{
+    [SerializeField] private GameObject object1;
+    [SerializeField] private GameObject object2;
+    [SerializeField] private GameObject object3;
+    [SerializeField] private GameObject targetObject;
 
-    void Start() {
-        if (clueText != null) {
-            clueText.gameObject.SetActive(false); // start hidden
-        }
-    }
+    void Update()
+    {
+        // Check if all three objects are active
+        bool allActive = object1.activeSelf && object2.activeSelf && object3.activeSelf;
 
-    // Hook this up in Inspector to XR Simple Interactable events
-    public void InspectClue() {
-        if (!clueFound) {
-            clueFound = true;
-
-            if (clueText != null) {
-                clueText.gameObject.SetActive(true); // show text
-            }
-
-            if (gameObject.CompareTag("Clue1")) {
-                GameManager.Instance.RegisterClueFound(1);
-            } else if (gameObject.CompareTag("Clue2")) {
-                GameManager.Instance.RegisterClueFound(2);
-            } else if (gameObject.CompareTag("Clue3")) {
-                GameManager.Instance.RegisterClueFound(3);
-            }
-        }
-    }
-
-    public void StopInspecting() {
-        if (clueText != null) {
-            clueText.gameObject.SetActive(false); // hide text
+        // Set the target object active only when all three are active
+        if (targetObject != null)
+        {
+            targetObject.SetActive(allActive);
         }
     }
 }
