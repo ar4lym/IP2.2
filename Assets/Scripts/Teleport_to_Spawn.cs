@@ -11,10 +11,18 @@ public class TeleportToSpawn : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!armed || teleporting) return;
-
         Transform rig = other.transform.root;
         if (!rig.CompareTag("Player")) return;
+
+        // If player steps onto spawn tile, re-arm teleport
+        if (rig.position == spawnPoint.position)
+        {
+            armed = true;
+            Debug.Log("Teleport re-armed after stepping onto spawn tile.");
+            return; // Don't teleport if just re-arming
+        }
+
+        if (!armed || teleporting) return;
 
         StartCoroutine(TeleportPlayer(rig));
     }
@@ -38,10 +46,6 @@ public class TeleportToSpawn : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Transform rig = other.transform.root;
-        if (!rig.CompareTag("Player")) return;
-
-        armed = true; // only re-arm when fully stepped off
-        Debug.Log("Triggered from: " + transform.root.name);
+        // ...existing code...
     }
 }
