@@ -4,12 +4,6 @@ public class Tiles : MonoBehaviour
 {
     public Transform spawnPoint;
 
-    //public AudioSource lava;
-    
-    /// <summary>
-    /// When player touch it, they respawn to spawn point
-    /// </summary>
-    
     public void OnTriggerEnter(Collider other)
     {
         
