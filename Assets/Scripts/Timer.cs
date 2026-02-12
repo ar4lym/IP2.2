@@ -28,7 +28,7 @@ public class Timer : MonoBehaviour
         // Initialize Firebase references
         auth = FirebaseAuth.DefaultInstance;
         dbRef = FirebaseDatabase.DefaultInstance.RootReference;
-        
+
         elapsedTime = 0f;
         isPaused = false;
 
@@ -68,9 +68,19 @@ public class Timer : MonoBehaviour
 
     public void StopTimer()
     {
-        enabled = false; // stops Update
+        enabled = false;
         SaveBestTime(elapsedTime);
-        Debug.Log($"Timer.StopTimer() called! Final time: {elapsedTime}s");
+
+        // Check for achievement
+        AchievementBehaviour achievementBehaviour = FindObjectOfType<AchievementBehaviour>();
+        if (achievementBehaviour != null)
+        {
+            achievementBehaviour.CheckSingleScene(sceneName);
+        }
+        else
+        {
+            Debug.LogError("AchievementBehaviour not found in scene!");
+        }
     }
 
     private void SaveBestTime(float timeSpent)
@@ -83,7 +93,7 @@ public class Timer : MonoBehaviour
         }
 
         string userId = auth.CurrentUser.UserId;
-        
+
         if (string.IsNullOrEmpty(userId))
         {
             Debug.LogError("User ID is null or empty!");
@@ -125,7 +135,7 @@ public class Timer : MonoBehaviour
                     {
                         string json = snapshot.GetRawJsonValue();
                         entryData = JsonUtility.FromJson<SceneEntryData>(json);
-                        
+
                         // Update best time if current time is better
                         if (timeSpent < entryData.bestTime)
                         {
