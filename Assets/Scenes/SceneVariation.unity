@@ -14295,9 +14295,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Register
-
-'
+  m_text: Log in
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2fe6882a111399c45b12bce1b6c35fe7, type: 2}
   m_sharedMaterial: {fileID: 2604345152612891281, guid: 2fe6882a111399c45b12bce1b6c35fe7, type: 2}
