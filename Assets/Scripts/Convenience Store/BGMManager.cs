@@ -11,23 +11,26 @@ using UnityEngine;
 
 public class BGMManager : MonoBehaviour
 {
-    public AudioSource csBGM;
-    public AudioSource anxiousBGM;
+    public AudioSource csBGM;  // Convenience Store BGM
+    public AudioSource anxiousBGM; // Anxious BGM
 
-    public float anxietyStartTime = 60f;
-    public float fadeSpeed = 0.4f;
+    public float anxietyStartTime = 60f;  // Time in seconds to start anxious BGM
+    public float fadeSpeed = 0.4f;  // Speed of volume fade
 
-    private float localTimer = 0f;
-    private bool anxietyActive = false;
-    public GameObject anxietyPopup;
-    private bool popupShown = false;
+    private float localTimer = 0f;  // Local timer to track elapsed time
+    private bool anxietyActive = false;  // Flag to indicate if anxiety BGM is active
+    public GameObject anxietyPopup;  // Popup to show when anxiety BGM starts
+    private bool popupShown = false;  // To ensure popup is shown only once
 
-    private bool taskCompleted = false;
+    private bool taskCompleted = false;  // Flag to indicate if the task is completed
 
+
+    /// Initialises the BGM settings
+    /// Sets the convenience store BGM to play and anxious BGM volume to 0
     void Start()
     {
         csBGM.Play();
-        anxiousBGM.volume = 0f;
+        anxiousBGM.volume = 0f; 
     }
 
 
@@ -36,27 +39,27 @@ public class BGMManager : MonoBehaviour
     /// while also showing a popup to indicate the change in atmosphere.
     void Update()
     {
-        if (taskCompleted) return;
+        if (taskCompleted) return;  // Exit if task is completed
 
-        localTimer += Time.deltaTime;
+        localTimer += Time.deltaTime;  // Increment local timer
 
-        if (localTimer >= anxietyStartTime)
+        if (localTimer >= anxietyStartTime)  // Start anxiety BGM after specified time
         {
             anxietyActive = true;
         }
 
         if (anxietyActive)
         {
-            csBGM.volume = Mathf.MoveTowards(csBGM.volume, 0f, fadeSpeed * Time.deltaTime);
+            csBGM.volume = Mathf.MoveTowards(csBGM.volume, 0f, fadeSpeed * Time.deltaTime);  // Fade out convenience store BGM
 
-            if (!anxiousBGM.isPlaying)
+            if (!anxiousBGM.isPlaying)  // Start anxious BGM if not already playing
                 anxiousBGM.Play();
 
-            anxiousBGM.volume = Mathf.MoveTowards(anxiousBGM.volume, 0.8f, fadeSpeed * Time.deltaTime);
+            anxiousBGM.volume = Mathf.MoveTowards(anxiousBGM.volume, 0.8f, fadeSpeed * Time.deltaTime);  // Fade in anxious BGM
         }
 
-        // Show the popup when the anxiety music starts playing.
-        if (localTimer >= anxietyStartTime && !popupShown)
+        /// Show popup once when anxiety BGM starts
+        if (localTimer >= anxietyStartTime && !popupShown)  // Show popup only once
         {
             anxietyActive = true;
             popupShown = true;
@@ -69,9 +72,10 @@ public class BGMManager : MonoBehaviour
     private void ShowPopup()
     {
         anxietyPopup.SetActive(true);
-        Invoke(nameof(HidePopup), 5f);
+        Invoke(nameof(HidePopup), 5f);  // Hide after 5 seconds
     }
 
+    /// Hides the anxiety popup after the duration has passed
     private void HidePopup()
     {
         anxietyPopup.SetActive(false);
@@ -83,7 +87,7 @@ public class BGMManager : MonoBehaviour
     {
         taskCompleted = true;
 
-        csBGM.volume = 0.6f;
+        csBGM.volume = 0.6f;    
         anxiousBGM.Stop();
         anxiousBGM.volume = 0f;
     }
