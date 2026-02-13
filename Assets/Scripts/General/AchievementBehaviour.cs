@@ -127,7 +127,7 @@ public class AchievementBehaviour : MonoBehaviour
         Debug.Log($"=== UnlockAchievement called for {sceneName} ===");
 
         string badgeKey = "Badge_" + sceneName;
-        string badgeTitle = "Fastest " + sceneName + " Cleaner";
+        string badgeTitle = "Fastest " + sceneName + " Completer";
         string badgeDescription = "Completed the " + sceneName + " scene in under 3 minutes.";
 
         Debug.Log($"Badge key: {badgeKey}");
