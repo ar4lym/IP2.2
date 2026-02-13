@@ -10,23 +10,16 @@ public class OCDStepTile : MonoBehaviour
     public TileGameManager manager;
 
     [Header("Correct Tile Settings")]
-    public Renderer tileRenderer;      // the mesh renderer to change material
+    public Renderer tileRenderer;
     public Material redMat;
     public Material greenMat;
-    public float convertDelay = 2f;
+    public float convertDelay = 3f;
 
-    [Header("Wrong Tile Settings")]
-    public float damageCooldown = 1.0f; // prevents hp melting instantly
-
-    private bool playerOnTile = false;
-
-    // Correct tile state
+    // State
     private bool isConvertedGreen = false;
     private bool converting = false;
     private bool counted = false;
-
-    // Wrong tile cooldown
-    private float nextDamageTime = 0f;
+    private bool playerOnTile = false;
 
     private void Reset()
     {
@@ -42,24 +35,9 @@ public class OCDStepTile : MonoBehaviour
 
         if (tileType == TileType.CorrectRed)
         {
-            // If already converted, do nothing
-            if (isConvertedGreen || converting) return;
-            StartCoroutine(ConvertToGreenAfterDelay());
+            if (!isConvertedGreen && !converting)
+                StartCoroutine(ConvertToGreenAfterDelay());
         }
-        else
-        {
-            TryDamage();
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        // In case they "stand" on wrong tile after teleport
-        Transform rig = other.transform.root;
-        if (!rig.CompareTag("Player")) return;
-
-        if (tileType == TileType.WrongGreen)
-            TryDamage();
     }
 
     private void OnTriggerExit(Collider other)
@@ -76,7 +54,7 @@ public class OCDStepTile : MonoBehaviour
 
         yield return new WaitForSeconds(convertDelay);
 
-        // Optional rule: require them to still be on the tile when time finishes
+        // Must still be standing on the tile
         if (!playerOnTile)
         {
             converting = false;
@@ -94,20 +72,12 @@ public class OCDStepTile : MonoBehaviour
         if (!counted)
         {
             counted = true;
-            if (manager != null) manager.AddCompletedTile();
+            if (manager != null)
+                manager.AddCompletedTile();
         }
     }
 
-    private void TryDamage()
-    {
-        if (Time.time < nextDamageTime) return;
-        nextDamageTime = Time.time + damageCooldown;
-
-        if (manager != null)
-            manager.Damage(1);
-    }
-
-    // Optional helper if you want to set the starting mat
+    // Optional: reset tile back to red
     public void ForceRed()
     {
         isConvertedGreen = false;
@@ -118,4 +88,3 @@ public class OCDStepTile : MonoBehaviour
             tileRenderer.material = redMat;
     }
 }
-

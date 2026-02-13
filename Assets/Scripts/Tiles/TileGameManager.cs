@@ -1,53 +1,73 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement; // Needed for the teleport button
 
 public class TileGameManager : MonoBehaviour
 {
     [Header("Game Rules")]
     public int totalCorrectTiles = 9;
-    public int maxHealth = 3;
 
     [Header("UI")]
-    public TMP_Text counterText;     // e.g. "3/9"
-    public TMP_Text healthText;      // e.g. "HP: 2"
-    public GameObject congratsPopup; // panel popup
+    public TMP_Text counterText;
+
+    [Header("Congrats UI")]
+    public GameObject congratsPopup;
+    public TMP_Text congratsText;
+
+    [Header("Reminder UI")]
+    public GameObject reminderPopup;
+    public TMP_Text reminderText;
+    public float reminderDuration = 3f;
 
     private int completed = 0;
-    private int health;
 
     private void Start()
     {
-        health = maxHealth;
         if (congratsPopup != null) congratsPopup.SetActive(false);
+        if (reminderPopup != null) reminderPopup.SetActive(false);
         UpdateUI();
     }
 
+    // This is the function called by the Tiles
     public void AddCompletedTile()
     {
-        completed++;
-        if (completed > totalCorrectTiles) completed = totalCorrectTiles;
-
-        UpdateUI();
+        completed++; // 1. Increase the number
+        UpdateUI();  // 2. Update the 0/9 text
 
         if (completed >= totalCorrectTiles)
         {
-            if (congratsPopup != null) congratsPopup.SetActive(true);
+            if (congratsPopup != null)
+            {
+                congratsPopup.SetActive(true);
+                if (congratsText != null) 
+                    congratsText.text = "Congratulations!\nAll tiles completed.";
+            }
         }
-    }
-
-    public void Damage(int amount = 1)
-    {
-        health -= amount;
-        if (health < 0) health = 0;
-        UpdateUI();
-
-        // Optional: handle death/reset here
-        // if (health <= 0) { ... }
     }
 
     private void UpdateUI()
     {
-        if (counterText != null) counterText.text = $"{completed}/{totalCorrectTiles}";
-        if (healthText != null) healthText.text = $"HP: {health}";
+        if (counterText != null)
+            counterText.text = $"{completed}/{totalCorrectTiles}";
+    }
+
+
+    private IEnumerator ShowReminder(string message)
+    {
+        if (reminderPopup == null || reminderText == null) yield break;
+
+        reminderText.text = message;
+        reminderPopup.SetActive(true);
+
+        yield return new WaitForSeconds(reminderDuration);
+
+        reminderPopup.SetActive(false);
+    }
+
+    // Link this to your Button OnClick event in the inspector
+    public void LoadNextScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
