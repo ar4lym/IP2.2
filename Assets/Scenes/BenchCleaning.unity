@@ -47971,11 +47971,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   benchesCleaned: 0
   benchesToClean: 10
-  countText: {fileID: 0}
-  completionUI: {fileID: 0}
-  ocdPopupPanel: {fileID: 0}
+  countText: {fileID: 1158794064}
+  completionUI: {fileID: 1083381171}
+  ocdPopupPanel: {fileID: 1910939910}
   popupDuration: 3.5
-  timer: {fileID: 0}
+  timer: {fileID: 1814478766}
   completionSound: {fileID: 917691918}
   bgmSource: {fileID: 1533946882}
 --- !u!1 &197393679 stripped
