@@ -1,18 +1,12 @@
-// public class Dirt : MonoBehaviour
-// {
-//     public float dirtAmount = 100f;
-
-//     public void Clean(float amount)
-//     {
-//         dirtAmount -= amount;
-
-//         if (dirtAmount <= 0)
-//         {
-//             gameObject.SetActive(false);
-//         }
-//     }
-// }
-
+/// <summary>
+/// Dirt.cs
+/// Handles the dirt behaviour on each bench.
+/// Reduces dirt amount when sprayed and triggers
+/// the bench cleaned event once fully cleaned.
+/// </summary>
+/// <author> Schanelle Leah Jackson </author>
+/// <date> 13/02/2026 </date>
+/// <StudentID> S10269101G </StudentID>
 
 using UnityEngine;
 
@@ -22,6 +16,7 @@ public class Dirt : MonoBehaviour
     private bool isCleaned = false;
 
     public AudioSource cleanSound;   
+
     public void Clean(float amount)
     {
         if (isCleaned) return;
