@@ -2,6 +2,8 @@
 /// ConviStoreManager.cs
 /// This script manages the item arrangement progress in the convenience store level.
 /// It tracks the number of items correctly placed into sockets and updates the UI accordingly.
+/// When all items are arranged, it stops the timer, shows the completion UI, and can trigger audio changes.
+/// It also handles showing a warning UI when the player places an incorrect item.
 /// </summary>
 /// <author> Leong Ming Hui </author>
 /// <date> 06/02/2026 </date>
@@ -27,16 +29,16 @@ public class ConviStoreManager : MonoBehaviour
     public GameObject wrongItemUI;
     public float wrongUIShowSeconds = 1.5f;
 
-    [Header("Manager References")]
+    [Header("Manager References")]  
     public Timer timer;
     public BGMManager audioManager;
 
-    private Coroutine wrongUICoroutine;
+    private Coroutine wrongUICoroutine;  // Coroutine reference for hiding wrong item UI
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        // Initialize UI
+        // Initialise UI
         UpdateUI();
         
         if (completeUI != null)
@@ -106,7 +108,7 @@ public class ConviStoreManager : MonoBehaviour
         if (timer != null)
         {
             timer.StopTimer();
-            float finalTime = timer.GetElapsedTime();
+            float finalTime = timer.GetElapsedTime();   // Get final time
             Debug.Log($"Task completed in {finalTime} seconds");
         }
         else
@@ -144,17 +146,17 @@ public class ConviStoreManager : MonoBehaviour
         if (wrongItemUI == null)
         {
             Debug.LogWarning("Wrong item UI is not assigned!");
-            return;
+            return;  // Exit if UI is not assigned
         }
 
         // Restart timer if player keeps doing wrong placements
         if (wrongUICoroutine != null)
         {
-            StopCoroutine(wrongUICoroutine);
+            StopCoroutine(wrongUICoroutine);  // Stop existing coroutine
         }
 
-        wrongItemUI.SetActive(true);
-        wrongUICoroutine = StartCoroutine(HideWrongUIAfterDelay());
+        wrongItemUI.SetActive(true);    // Show wrong item UI
+        wrongUICoroutine = StartCoroutine(HideWrongUIAfterDelay());     // Start coroutine to hide UI after delay
     }
 
     /// <summary>
@@ -162,14 +164,14 @@ public class ConviStoreManager : MonoBehaviour
     /// </summary>
     private IEnumerator HideWrongUIAfterDelay()
     {
-        yield return new WaitForSeconds(wrongUIShowSeconds);
+        yield return new WaitForSeconds(wrongUIShowSeconds);  // Wait for specified seconds
         
         if (wrongItemUI != null)
         {
             wrongItemUI.SetActive(false);
         }
         
-        wrongUICoroutine = null;
+        wrongUICoroutine = null;    // Clear coroutine reference
     }
 
     /// <summary>
