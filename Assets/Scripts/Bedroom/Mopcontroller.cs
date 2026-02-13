@@ -1,3 +1,12 @@
+/// <summary>
+/// MopController.cs
+/// This script is a script for 1 of the 3 ai
+/// this controls the mop in the second scene
+/// it is used to clean water puddles.
+/// </summary>
+/// <author> Lee Jia Lu </author>
+/// <date> 25/01/2026 </date>
+/// <StudentID> S10269187E </StudentID>
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 

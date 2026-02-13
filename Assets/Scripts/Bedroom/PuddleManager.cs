@@ -1,3 +1,12 @@
+/// <summary>
+/// Ghost.cs
+/// This script is a script for 1 of the 3 ai
+/// this controls the ghost in the second scene
+/// it chases you and you die upon touching it.
+/// </summary>
+/// <author> Lee Jia Lu </author>
+/// <date> 15/08/2025 </date>
+/// <StudentID> S10269187E </StudentID>
 using UnityEngine;
 using TMPro;
 
