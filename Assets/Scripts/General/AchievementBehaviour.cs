@@ -31,12 +31,16 @@ public class AchievementBehaviour : MonoBehaviour
         {
             Debug.Log("Logged in as: " + auth.CurrentUser.UserId);
         }
+        foreach (string scene in scenes)
+        {
+            ListenForBestTime(scene);
+        }
     }
 
     public void CheckSingleScene(string sceneName)
     {
         Debug.Log($"=== CheckSingleScene called for: {sceneName} ===");
-        
+
         FirebaseUser user = auth.CurrentUser;
 
         if (user == null)
@@ -60,7 +64,7 @@ public class AchievementBehaviour : MonoBehaviour
         sceneRef.GetValueAsync().ContinueWithOnMainThread(task =>
         {
             Debug.Log($"GetValueAsync completed for {sceneName}");
-            
+
             if (task.IsFaulted)
             {
                 Debug.LogError($"Error reading scene data for {sceneName}: {task.Exception}");
@@ -71,13 +75,13 @@ public class AchievementBehaviour : MonoBehaviour
             {
                 Debug.Log($"Scene entry EXISTS for {sceneName}");
                 DataSnapshot snapshot = task.Result;
-                
+
                 // Check if bestTime exists
                 if (snapshot.Child("bestTime").Exists)
                 {
                     string bestTimeStr = snapshot.Child("bestTime").Value.ToString();
                     Debug.Log($"bestTime value (string): {bestTimeStr}");
-                    
+
                     float bestTime = float.Parse(bestTimeStr);
 
                     Debug.Log($"{sceneName} best time: {bestTime}s (required: {REQUIRED_TIME}s or less)");
@@ -121,7 +125,7 @@ public class AchievementBehaviour : MonoBehaviour
     private void UnlockAchievement(string userId, string sceneName)
     {
         Debug.Log($"=== UnlockAchievement called for {sceneName} ===");
-        
+
         string badgeKey = "Badge_" + sceneName;
         string badgeTitle = "Fastest " + sceneName + " Cleaner";
         string badgeDescription = "Completed the " + sceneName + " scene in under 3 minutes.";
@@ -143,7 +147,7 @@ public class AchievementBehaviour : MonoBehaviour
         achievementRef.GetValueAsync().ContinueWithOnMainThread(task =>
         {
             Debug.Log($"Achievement check completed for {badgeKey}");
-            
+
             if (task.IsFaulted)
             {
                 Debug.LogError($"Error checking achievement for {sceneName}: {task.Exception}");
@@ -153,18 +157,18 @@ public class AchievementBehaviour : MonoBehaviour
             if (!task.Result.Exists)
             {
                 Debug.Log($"Achievement does NOT exist yet. Creating new achievement...");
-                
+
                 // Create achievement object
                 AchievementData achievementData = new AchievementData(badgeTitle, sceneName, badgeDescription);
 
                 // Convert to JSON and save
                 string jsonData = JsonUtility.ToJson(achievementData);
                 Debug.Log($"JSON to save: {jsonData}");
-                
+
                 achievementRef.SetRawJsonValueAsync(jsonData).ContinueWithOnMainThread(saveTask =>
                 {
                     Debug.Log($"SetRawJsonValueAsync completed for {badgeKey}");
-                    
+
                     if (saveTask.IsFaulted)
                     {
                         Debug.LogError($"Failed to save achievement {badgeKey}: {saveTask.Exception}");
@@ -220,5 +224,45 @@ public class AchievementBehaviour : MonoBehaviour
                 Debug.Log($"Achievement {badgeKey} not found.");
             }
         });
+    }
+    public void ListenForBestTime(string sceneName)
+    {
+        FirebaseUser user = auth.CurrentUser;
+
+        if (user == null)
+        {
+            Debug.LogError("User not logged in.");
+            return;
+        }
+
+        string userId = user.UserId;
+
+        DatabaseReference bestTimeRef = dbRef
+            .Child("players")
+            .Child(userId)
+            .Child("sceneEntries")
+            .Child(sceneName)
+            .Child("bestTime");
+
+        bestTimeRef.ValueChanged += (sender, args) =>
+        {
+            if (args.DatabaseError != null)
+            {
+                Debug.LogError("Database error: " + args.DatabaseError.Message);
+                return;
+            }
+
+            if (args.Snapshot.Exists)
+            {
+                float bestTime = float.Parse(args.Snapshot.Value.ToString());
+
+                Debug.Log($"bestTime updated for {sceneName}: {bestTime}s");
+
+                if (bestTime <= REQUIRED_TIME)
+                {
+                    UnlockAchievement(userId, sceneName);
+                }
+            }
+        };
     }
 }

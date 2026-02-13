@@ -1,9 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Trashmanager : MonoBehaviour
 {
     public static Trashmanager Instance;
+
+    public string sceneVariationName = "SceneVariation";
 
     [Header("Trash Settings")]
     public int totalTrash = 5;
@@ -58,13 +61,19 @@ public class Trashmanager : MonoBehaviour
 
         if (trashCompleted && puddleManager.puddlesCompleted)
         {
-            Debug.Log("All tasks done — stopping timer");
+            Debug.Log("All tasks done — stopping timer and loading SceneVariation");
 
             if (timer != null)
                 timer.StopTimer();
-            else
-                Debug.LogWarning("Timer not assigned!");
+
+            // Small delay so player sees completion (optional but nice)
+            Invoke(nameof(LoadSceneVariation), 1f);
         }
+    }
+
+    void LoadSceneVariation()
+    {
+        SceneManager.LoadScene(sceneVariationName);
     }
 
     void UpdateTrashUI()
