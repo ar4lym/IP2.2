@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8530151723647525799}
   - component: {fileID: 3316659320602061772}
   - component: {fileID: 1916624552732741711}
+  - component: {fileID: 6999613811354573621}
   m_Layer: 0
   m_Name: 'Step Trigger '
   m_TagString: Untagged
@@ -61,13 +62,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494735103426709351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a194f95293f232489a65edc7684b522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 0}
   teleportDelay: 0.3
+--- !u!114 &6999613811354573621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494735103426709351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c95bbcb7fb9b00c458b41f2704415027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileType: 1
+  manager: {fileID: 0}
+  tileRenderer: {fileID: 2014780470099303430}
+  redMat: {fileID: 2100000, guid: ea4e70bbb45ad434b9a47bce5a51ccca, type: 2}
+  greenMat: {fileID: 2100000, guid: c2ef33529b72a57408e937d99d1f83cb, type: 2}
+  convertDelay: 3
+  damageCooldown: 2
 --- !u!1 &3226734192534888837
 GameObject:
   m_ObjectHideFlags: 0
