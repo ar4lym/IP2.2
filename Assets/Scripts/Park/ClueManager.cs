@@ -1,6 +1,18 @@
+/// <summary>
+/// ClueManager.cs
+/// Manages clue answering, feedback, and scene transitions.
+/// </summary>
+/// <author> Aralyn Han Zi Ning </author>
+/// <date> 02/08/2026 </date>
+/// <StudentID> S10267170A </StudentID>
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Controls the clue interaction system by handling player answers,
+/// displaying correct or wrong feedback, stopping the timer,
+/// and transitioning to the next scene.
+/// </summary>
 public class ClueManager : MonoBehaviour
 {
     [Header("Answer Settings")]
@@ -15,6 +27,9 @@ public class ClueManager : MonoBehaviour
 
     private Timer timer;
 
+    /// <summary>
+    /// Finds Timer reference and hides feedback objects on start.
+    /// </summary>
     private void Start()
     {
         timer = FindObjectOfType<Timer>();
@@ -25,19 +40,26 @@ public class ClueManager : MonoBehaviour
         if (wrongObject != null)
             wrongObject.SetActive(false);
     }
-
-    // Assign this to Button 1
+    /// <summary>
+    /// Called when first answer button is clicked.
+    /// </summary>
     public void OnFirstOptionClicked()
     {
         HandleAnswer(isFirstOptionCorrect);
     }
 
-    // Assign this to Button 2
+    /// <summary>
+    /// Called when second answer button is clicked.
+    /// </summary>
     public void OnSecondOptionClicked()
     {
         HandleAnswer(!isFirstOptionCorrect);
     }
 
+    /// <summary>
+    /// Processes player's answer, stops timer,
+    /// shows feedback, and schedules scene change.
+    /// </summary>
     private void HandleAnswer(bool isCorrect)
     {
         // Stop timer immediately
@@ -61,6 +83,9 @@ public class ClueManager : MonoBehaviour
         Invoke(nameof(LoadNextScene), 6.7f);
     }
 
+    /// <summary>
+    /// Loads the next scene after feedback delay.
+    /// </summary>
     private void LoadNextScene()
     {
         SceneManager.LoadScene(nextSceneName);
