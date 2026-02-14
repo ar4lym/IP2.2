@@ -71,7 +71,10 @@
 - Mechanic 4 (Bench Cleaning): Each bench has a green block representing dirt. When the green block is properly sprayed and disappears, it counts as one bench cleaned. Clean all 10 benches to complete the game.
 - Mechanic 5 (Tiles): Teleport onto every red tile for 2 seconds to turn them green, once 9 tiles are activated, the game is completed 
 
-Referneces and credits to external assets
-Girl in park: (https://sketchfab.com/3d-models/child-changli-wuthering-waves-3bd583c6433c48929524ed8bc26d6be7)
-Boy in park: (https://sketchfab.com/3d-models/victorian-child-low-poly-character-model-ac62dc5a6b9148719201d8ba0f495d65)
-Textures for models: (https://substance3d.adobe.com/community-assets?assetType=substanceMaterial)
+# Assets & Credits
+- Girl - (https://sketchfab.com/3d-models/child-changli-wuthering-waves-3bd583c6433c48929524ed8bc26d6be7)
+- Boy - (https://sketchfab.com/3d-models/victorian-child-low-poly-character-model-ac62dc5a6b9148719201d8ba0f495d65)
+- Textures for models - (https://substance3d.adobe.com/community-assets?assetType=substanceMaterial)
+- Terrain Assets - Unity Asset Store
+- Game Engine – Unity (XR)
+- Sound Effects – Free sound libraries 
