@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement; // Needed for the teleport button
+using UnityEngine.SceneManagement;
 
 public class TileGameManager : MonoBehaviour
 {
@@ -15,25 +15,20 @@ public class TileGameManager : MonoBehaviour
     public GameObject congratsPopup;
     public TMP_Text congratsText;
 
-    [Header("Reminder UI")]
-    public GameObject reminderPopup;
-    public TMP_Text reminderText;
-    public float reminderDuration = 3f;
-
     private int completed = 0;
 
     private void Start()
     {
+        // Ensure the popup is hidden when the game starts
         if (congratsPopup != null) congratsPopup.SetActive(false);
-        if (reminderPopup != null) reminderPopup.SetActive(false);
         UpdateUI();
     }
 
-    // This is the function called by the Tiles
+    // This is called by the Tiles once they turn green
     public void AddCompletedTile()
     {
-        completed++; // 1. Increase the number
-        UpdateUI();  // 2. Update the 0/9 text
+        completed++; 
+        UpdateUI(); 
 
         if (completed >= totalCorrectTiles)
         {
@@ -50,24 +45,5 @@ public class TileGameManager : MonoBehaviour
     {
         if (counterText != null)
             counterText.text = $"{completed}/{totalCorrectTiles}";
-    }
-
-
-    private IEnumerator ShowReminder(string message)
-    {
-        if (reminderPopup == null || reminderText == null) yield break;
-
-        reminderText.text = message;
-        reminderPopup.SetActive(true);
-
-        yield return new WaitForSeconds(reminderDuration);
-
-        reminderPopup.SetActive(false);
-    }
-
-    // Link this to your Button OnClick event in the inspector
-    public void LoadNextScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
     }
 }

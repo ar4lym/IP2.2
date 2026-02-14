@@ -13,9 +13,8 @@ public class OCDStepTile : MonoBehaviour
     public Renderer tileRenderer;
     public Material redMat;
     public Material greenMat;
-    public float convertDelay = 3f;
+    public float convertDelay = 2f; // Changed to 2s as per your original request
 
-    // State
     private bool isConvertedGreen = false;
     private bool converting = false;
     private bool counted = false;
@@ -28,47 +27,44 @@ public class OCDStepTile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Transform rig = other.transform.root;
-        if (!rig.CompareTag("Player")) return;
+        // Only look for objects with the "Player" tag
+        if (!other.transform.root.CompareTag("Player")) return;
 
         playerOnTile = true;
 
         if (tileType == TileType.CorrectRed)
         {
             if (!isConvertedGreen && !converting)
+            {
                 StartCoroutine(ConvertToGreenAfterDelay());
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Transform rig = other.transform.root;
-        if (!rig.CompareTag("Player")) return;
-
+        if (!other.transform.root.CompareTag("Player")) return;
         playerOnTile = false;
     }
 
     private IEnumerator ConvertToGreenAfterDelay()
     {
         converting = true;
-
         yield return new WaitForSeconds(convertDelay);
 
-        // Must still be standing on the tile
+        // Fail-safe: If player leaves before 2 seconds, stop converting
         if (!playerOnTile)
         {
             converting = false;
             yield break;
         }
 
-        // Turn tile green
         isConvertedGreen = true;
         converting = false;
 
         if (tileRenderer != null && greenMat != null)
             tileRenderer.material = greenMat;
 
-        // Count once
         if (!counted)
         {
             counted = true;
@@ -77,13 +73,11 @@ public class OCDStepTile : MonoBehaviour
         }
     }
 
-    // Optional: reset tile back to red
     public void ForceRed()
     {
         isConvertedGreen = false;
         converting = false;
         counted = false;
-
         if (tileRenderer != null && redMat != null)
             tileRenderer.material = redMat;
     }
