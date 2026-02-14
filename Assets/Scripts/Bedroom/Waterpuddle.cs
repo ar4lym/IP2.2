@@ -9,9 +9,11 @@
 /// <StudentID> S10269187E </StudentID>
 using UnityEngine;
 
+using TMPro;
 public class WaterPuddle : MonoBehaviour
 {
     public float cleanTimeRequired = 3f;
+    public TMP_Text progressText; 
 
     [Header("Audio")]
     public AudioClip moppingSound;
@@ -47,8 +49,11 @@ public class WaterPuddle : MonoBehaviour
                     audioSource.Play();
                 }
             }
+
             currentCleanTime += Time.deltaTime;
             Debug.Log("Mopping... " + currentCleanTime.ToString("F2"));
+
+            ProgressTextUpdate();
 
             if (currentCleanTime >= cleanTimeRequired)
             {
@@ -64,6 +69,7 @@ public class WaterPuddle : MonoBehaviour
         if (mop != null)
         {
                         // Stop mopping sound
+            // Stop mopping sound
             if (isCurrentlyMopping)
             {
                 isCurrentlyMopping = false;
@@ -74,6 +80,8 @@ public class WaterPuddle : MonoBehaviour
             }
 
             currentCleanTime = 0f;
+            if (progressText != null)
+                progressText.text = ""; // <-- Explicitly clear text on interruption
             Debug.Log("Mopping interrupted, timer reset");
         }
     }
@@ -97,6 +105,25 @@ public class WaterPuddle : MonoBehaviour
         else
             Debug.LogWarning("PuddleManager instance not found!");
 
+        if (progressText != null)
+            progressText.text = ""; // <-- Clear text when cleaned
+
         Destroy(gameObject); // remove puddle
+    }
+
+    private void ProgressTextUpdate()
+    {
+        if (progressText != null)
+        {
+            float progress = Mathf.Clamp01(currentCleanTime / cleanTimeRequired);
+            if (progress >= 1f || isCleaned)
+            {
+                progressText.text = ""; // Reset/clear text after finished
+            }
+            else
+            {
+                progressText.text = $"Cleaning: {(progress * 100f).ToString("F0")}%";
+            }
+        }
     }
 }

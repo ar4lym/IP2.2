@@ -18,13 +18,13 @@ using UnityEngine.SceneManagement;
 public class Trashmanager : MonoBehaviour
 {
     public static Trashmanager Instance;
-
+    public GameObject BedroomGameManager;
     public string sceneVariationName = "SceneVariation";
 
     [Header("Trash Settings")]
     public int totalTrash = 5;
 
-    private int trashCollected = 0;
+    public int trashCollected = 0;
     public bool trashCompleted = false;   // completion flag
 
     [Header("UI")]
@@ -69,6 +69,7 @@ public class Trashmanager : MonoBehaviour
         // Mark trash done
         if (trashCollected >= totalTrash)
         {
+            BedroomGameManager.GetComponent<BedroomGameManager>().CheckCompletion();
             trashCompleted = true;
             Debug.Log("Trash completed!");
             TryStopTimer();

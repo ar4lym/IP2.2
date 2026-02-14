@@ -13,10 +13,10 @@ using TMPro;
 public class PuddleManager : MonoBehaviour
 {
     public static PuddleManager Instance;
-
+    public GameObject BedroomGameManager;
     [Header("Puddles")]
     public int totalPuddles = 5;
-    private int puddlesCleaned = 0;
+    public int puddlesCleaned = 0;
 
     public bool puddlesCompleted = false;   // ✅ completion flag
 
@@ -53,6 +53,7 @@ public class PuddleManager : MonoBehaviour
             puddlesCompleted = true;
             Debug.Log("Puddles completed!");
 
+            BedroomGameManager.GetComponent<BedroomGameManager>().CheckCompletion();
             // 🔗 Ask TrashManager to check AND condition
             if (Trashmanager.Instance != null)
                 Trashmanager.Instance.TryStopTimer();
