@@ -1,3 +1,9 @@
+/// <summary>
+/// SceneEntryData.cs
+///  Used to  store and pass around achievement information in the scene.
+/// <author> Aralyn Han Zi Ning </author>
+/// <date> 13/02/2026 </date>
+/// <StudentID> S10267170A </StudentID>
 public class AchievementData
 {
     public string title;
