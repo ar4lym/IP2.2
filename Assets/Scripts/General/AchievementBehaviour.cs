@@ -15,7 +15,8 @@ public class AchievementBehaviour : MonoBehaviour
         "Bedroom",
         "Park",
         "BenchCleaning",
-        "ConvenienceStore"
+        "ConvenienceStore",
+        "Tiles"
     };
 
     void Start()

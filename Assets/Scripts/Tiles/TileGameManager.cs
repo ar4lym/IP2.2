@@ -17,6 +17,8 @@ public class TileGameManager : MonoBehaviour
 
     private int completed = 0;
 
+    public Timer timer;
+
     private void Start()
     {
         // Ensure the popup is hidden when the game starts
@@ -27,16 +29,17 @@ public class TileGameManager : MonoBehaviour
     // This is called by the Tiles once they turn green
     public void AddCompletedTile()
     {
-        completed++; 
-        UpdateUI(); 
+        completed++;
+        UpdateUI();
 
         if (completed >= totalCorrectTiles)
         {
             if (congratsPopup != null)
             {
                 congratsPopup.SetActive(true);
-                if (congratsText != null) 
+                if (congratsText != null)
                     congratsText.text = "Congratulations!\nAll tiles completed.";
+                    timer.StopTimer();
             }
         }
     }

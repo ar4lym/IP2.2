@@ -19574,7 +19574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'All benches have been cleaned!
+  m_text: 'All tasks have been cleaned!
 
 '
   m_isRightToLeft: 0
@@ -19641,7 +19641,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -299.02658, w: -28.256123}
+  m_margin: {x: 53.24895, y: 0, z: -264.88843, w: -28.256123}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
