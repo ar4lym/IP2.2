@@ -11,12 +11,17 @@ using UnityEngine;
 
 public class Throwtrash : MonoBehaviour
 {
+    
+    public AudioSource trashAudioSource;
     private void OnTriggerEnter(Collider other)
     {
         PickupTrash trash = other.GetComponent<PickupTrash>();
 
         if (trash != null)
         {
+              if (trashAudioSource != null)
+            trashAudioSource.Play();
+
             trash.Collect();
         }
     }

@@ -56,7 +56,7 @@ public class Trashmanager : MonoBehaviour
     {
         return trashCollected;
     }
-    
+
     /// <summary>
     /// Called when a trash item is collected.
     /// Updates counter and checks for completion.
@@ -66,7 +66,6 @@ public class Trashmanager : MonoBehaviour
         trashCollected++;
         UpdateTrashUI();
 
-        // Mark trash done
         if (trashCollected >= totalTrash)
         {
             BedroomGameManager.GetComponent<BedroomGameManager>().CheckCompletion();
