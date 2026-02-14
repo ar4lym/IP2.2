@@ -1,3 +1,12 @@
+/// <summary>
+/// AchievementBehaviour.cs
+/// Manages achievement unlocking logic based on scene completion times.
+/// Listens for best time updates in Firebase and awards achievements
+/// when requirements are met.
+/// </summary>
+/// <author> Lee Jia Lu </author>
+/// <date> 23/01/2026 </date>
+/// <StudentID> S10269187E </StudentID>
 using UnityEngine;
 using Firebase.Database;
 using Firebase.Extensions;

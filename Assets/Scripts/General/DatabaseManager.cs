@@ -1,3 +1,11 @@
+/// <summary>
+/// DatabaseManager.cs
+/// Manages Firebase authentication and database operations,
+/// including user sign-up, sign-in, sign-out, and profile data handling.
+/// </summary>
+/// <author> Lee Jia Lu </author>
+/// <date> 23/01/2026 </date>
+/// <StudentID> S10269187E </StudentID>
 using UnityEngine;
 using Firebase.Database;
 using System.Collections.Generic;
@@ -7,6 +15,11 @@ using Firebase.Auth;
 using Firebase;
 using System;
 
+/// <summary>
+/// Handles Firebase authentication and database interactions.
+/// Provides methods for signing up, signing in, signing out,
+/// and managing user profile data.
+/// </summary>
 public class DatabaseManager : MonoBehaviour
 {
     public TMP_InputField EmailInput;
@@ -18,6 +31,9 @@ public class DatabaseManager : MonoBehaviour
 
     public GameObject mainCanvas;
 
+    /// <summary>
+    /// Initializes Firebase dependencies and hides the main canvas until login.
+    /// </summary>
     void Start()
     {
         mainCanvas.SetActive(false);   // hide before login
@@ -37,6 +53,10 @@ public class DatabaseManager : MonoBehaviour
 
     // ---------------- AUTH ----------------
 
+    /// <summary>
+    /// Registers a new user with Firebase Authentication
+    /// and stores their email and display name in the database.
+    /// </summary>
     public void SignUp()
     {
         string email = EmailInput.text.Trim();
@@ -71,7 +91,9 @@ public class DatabaseManager : MonoBehaviour
             });
     }
 
-
+    /// <summary>
+    /// Signs in an existing user with Firebase Authentication.
+    /// </summary>
     public void SignIn()
     {
         string email = EmailInput.text.Trim();
@@ -101,23 +123,34 @@ public class DatabaseManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// Signs out the current user.
+    /// </summary>
     public void SignOut()
     {
         FirebaseAuth.DefaultInstance.SignOut();
         Debug.Log("User signed out");
     }
 
+    /// <summary>
+    /// Checks if a user is currently authenticated.
+    /// </summary>
     private bool IsAuthenticated()
     {
         return FirebaseAuth.DefaultInstance.CurrentUser != null;
     }
 
+    /// <summary>
+    /// Returns the current user's ID.
+    /// </summary>
     private string CurrentUserId()
     {
         return FirebaseAuth.DefaultInstance.CurrentUser.UserId;
     }
 
-
+    /// <summary>
+    /// Sets the current user's display name in the database.
+    /// </summary>
     public void SetUserName(string userName, Action<string> onError, Action onSuccess)
     {
         if (!IsAuthenticated())
@@ -145,6 +178,9 @@ public class DatabaseManager : MonoBehaviour
             });
     }
 
+    /// <summary>
+    /// Retrieves the current user's display name from the database.
+    /// </summary>
     public void GetUserName()
     {
         if (!IsAuthenticated())
