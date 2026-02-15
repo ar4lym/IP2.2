@@ -13,16 +13,47 @@ using Firebase.Database;
 using Firebase.Auth;
 using System;
 
+/// <summary>
+/// Manages game timer functionality with pause/resume capabilities and Firebase integration.
+/// Tracks elapsed time, displays it in UI, and saves best completion times to Firebase database.
+/// </summary>
 public class Timer : MonoBehaviour
 {
+    /// <summary>
+    /// UI text element that displays the formatted timer (MM:SS).
+    /// </summary>
     [SerializeField] TextMeshProUGUI timerText;
+
+    /// <summary>
+    /// Total elapsed time in seconds since the timer started.
+    /// </summary>
     private float elapsedTime;
+    
+    /// <summary>
+    /// Indicates whether the timer is currently paused.
+    /// </summary>
     private bool isPaused;
+
+    /// <summary>
+    /// Reference to the Firebase Realtime Database for storing player times.
+    /// </summary>
     private DatabaseReference dbRef;
+
+    /// <summary>
+    /// Reference to Firebase Authentication for identifying the current user.
+    /// </summary>
     private FirebaseAuth auth;
 
+    /// <summary>
+    /// Name of the current scene, used as a key for storing times in Firebase.
+    /// Assign via Inspector or SceneManager.
+    /// </summary>
     public string sceneName; // Assign via Inspector or SceneManager
 
+    /// <summary>
+    /// Initializes Firebase references and verifies user authentication.
+    /// Starts the timer at zero.
+    /// </summary>
     void Start()
     {
         // Initialize Firebase references
@@ -43,6 +74,10 @@ public class Timer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the timer each frame if not paused.
+    /// Formats elapsed time as MM:SS and updates the UI text.
+    /// </summary>
     void Update()
     {
         if (!isPaused)
@@ -54,18 +89,30 @@ public class Timer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pauses the timer and freezes game time.
+    /// Sets Time.timeScale to 0.
+    /// </summary>
     public void PauseGame()
     {
         isPaused = true;
         Time.timeScale = 0f;
     }
 
+    /// <summary>
+    /// Resumes the timer and restores normal game time.
+    /// Sets Time.timeScale to 1.
+    /// </summary>
     public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f;
     }
 
+    /// <summary>
+    /// Stops the timer, saves the completion time to Firebase, and checks for achievements.
+    /// Disables further timer updates.
+    /// </summary>
     public void StopTimer()
     {
         enabled = false;
@@ -83,6 +130,10 @@ public class Timer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Saves the completion time to Firebase if it's better than the existing best time.
+    /// Creates a new entry if this is the first completion of the scene.
+    /// </summary>
     private void SaveBestTime(float timeSpent)
     {
         // Check if user is authenticated
@@ -179,13 +230,17 @@ public class Timer : MonoBehaviour
         });
     }
 
-    // Public method to get current elapsed time
+    /// <summary>
+    /// Gets the current elapsed time since the timer started.
+    /// </summary>
     public float GetElapsedTime()
     {
         return elapsedTime;
     }
 
-    // Public method to check if timer is paused
+    /// <summary>
+    /// Checks whether the timer is currently paused.
+    /// </summary>
     public bool IsPaused()
     {
         return isPaused;

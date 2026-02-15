@@ -12,13 +12,35 @@ using Firebase.Database;
 using Firebase.Extensions;
 using Firebase.Auth;
 using System.Collections.Generic;
+
+/// <summary>
+/// Manages achievement tracking and unlocking based on scene completion times.
+/// Integrates with Firebase to store and retrieve achievement data for authenticated users.
+/// Automatically checks if players complete scenes under the required time threshold.
+/// </summary>
 public class AchievementBehaviour : MonoBehaviour
+
 {
+    /// <summary>
+    /// Reference to the Firebase Realtime Database for storing and retrieving achievement data.
+    /// </summary>
     private DatabaseReference dbRef;
+    
+    /// <summary>
+    /// Reference to Firebase Authentication for identifying the current user.
+    /// </summary>
     private FirebaseAuth auth;
 
-    private float REQUIRED_TIME = 180f;
+    /// <summary>
+    /// The maximum time (in seconds) allowed to unlock speed-based achievements.
+    /// Default is 180 seconds (3 minutes).
+    /// </summary>
 
+    private float REQUIRED_TIME = 180f;
+    
+    /// <summary>
+    /// List of scene names that have associated achievements.
+    /// </summary>
     private List<string> scenes = new List<string>
     {
         "Bedroom",
@@ -28,6 +50,10 @@ public class AchievementBehaviour : MonoBehaviour
         "Tiles"
     };
 
+    /// <summary>
+    /// Initializes Firebase references and sets up listeners for best time updates on all scenes.
+    /// Verifies user authentication status.
+    /// </summary>
     void Start()
     {
         auth = FirebaseAuth.DefaultInstance;
@@ -46,7 +72,10 @@ public class AchievementBehaviour : MonoBehaviour
             ListenForBestTime(scene);
         }
     }
-
+    /// <summary>
+    /// Checks if a specific scene's best time qualifies for an achievement unlock.
+    /// Reads the scene entry from Firebase and unlocks the achievement if time requirements are met.
+    /// </summary>
     public void CheckSingleScene(string sceneName)
     {
         Debug.Log($"=== CheckSingleScene called for: {sceneName} ===");
@@ -123,6 +152,10 @@ public class AchievementBehaviour : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// Checks all registered scenes for achievement qualification.
+    /// Iterates through the scenes list and calls CheckSingleScene for each.
+    /// </summary>
     public void CheckAllScenes()
     {
         Debug.Log("=== CheckAllScenes called ===");
@@ -132,6 +165,10 @@ public class AchievementBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Unlocks an achievement for a specific scene if not already unlocked.
+    /// Creates and saves achievement data to Firebase under the player's achievement node.
+    /// </summary>
     private void UnlockAchievement(string userId, string sceneName)
     {
         Debug.Log($"=== UnlockAchievement called for {sceneName} ===");
@@ -201,7 +238,9 @@ public class AchievementBehaviour : MonoBehaviour
         });
     }
 
-    // Optional: Method to read achievement data
+    /// <summary>
+    /// Retrieves and logs achievement data for a specific scene from Firebase.
+    /// </summary>
     public void GetAchievement(string userId, string sceneName)
     {
         string badgeKey = "Badge_" + sceneName;
@@ -235,6 +274,11 @@ public class AchievementBehaviour : MonoBehaviour
             }
         });
     }
+
+    /// <summary>
+    /// Sets up a real-time listener for best time updates on a specific scene.
+    /// Automatically attempts to unlock achievements when best times are updated in Firebase.
+    /// </summary>
     public void ListenForBestTime(string sceneName)
     {
         FirebaseUser user = auth.CurrentUser;

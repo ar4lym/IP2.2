@@ -9,10 +9,21 @@
 /// <StudentID> S10269187E </StudentID>
 using UnityEngine;
 
+/// <summary>
+/// Detects when trash items are thrown into a trash bin or collection area.
+/// Plays audio feedback and triggers the collection process.
+/// </summary>
 public class Throwtrash : MonoBehaviour
 {
-    
+    /// <summary>
+    /// Audio source that plays a sound effect when trash is successfully thrown in.
+    /// </summary>
     public AudioSource trashAudioSource;
+
+    /// <summary>
+    /// Called when a collider enters the trash bin's trigger zone.
+    /// Checks if the object is trash and collects it if valid.
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         PickupTrash trash = other.GetComponent<PickupTrash>();
