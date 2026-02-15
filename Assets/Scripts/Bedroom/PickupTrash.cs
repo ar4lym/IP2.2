@@ -1,6 +1,5 @@
 /// <summary>
 /// PickupTrash.cs
-/// This script is a script for 1 of the 3 ai
 /// this controls the trash in the second scene
 /// it is collected by the player.
 /// </summary>

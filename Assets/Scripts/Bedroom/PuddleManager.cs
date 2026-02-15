@@ -1,6 +1,5 @@
 /// <summary>
 /// PuddleManager.cs
-/// This script is a script for 1 of the 3 ai
 /// this controls the puddles in the second scene
 /// it tracks how many puddles are cleaned.
 /// </summary>

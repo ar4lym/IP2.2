@@ -1,6 +1,5 @@
 /// <summary>
 /// WaterPuddle.cs
-/// This script is a script for 1 of the 3 ai
 /// this controls the water puddle in the second scene
 /// it needs to be cleaned with a mop.
 /// </summary>

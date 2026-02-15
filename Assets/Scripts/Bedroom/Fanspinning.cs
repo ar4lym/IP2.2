@@ -1,6 +1,5 @@
 /// <summary>
 /// Fanspinning.cs
-/// This script is a script for 1 of the 3 ai
 /// this controls the fan in the second scene
 /// it spins continuously.
 /// </summary>

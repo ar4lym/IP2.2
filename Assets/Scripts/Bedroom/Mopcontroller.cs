@@ -1,8 +1,8 @@
 /// <summary>
 /// MopController.cs
-/// This script is a script for 1 of the 3 ai
-/// this controls the mop in the second scene
-/// it is used to clean water puddles.
+/// This script controls the mop in the second scene, 
+/// it tracks whether the mop is being held by the player or not.
+/// The mop is used to clean water puddles in the bedroom scene.
 /// </summary>
 /// <author> Lee Jia Lu </author>
 /// <date> 25/01/2026 </date>
