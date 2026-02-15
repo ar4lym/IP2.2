@@ -20992,7 +20992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &58762385
 RectTransform:
   m_ObjectHideFlags: 0
@@ -194757,6 +194757,9 @@ MonoBehaviour:
   trashCollected: 0
   trashCompleted: 0
   trashCounterText: {fileID: 964576455}
+  cleanPopup: {fileID: 58762384}
+  popupDelay: 30
+  popupDuration: 3
   puddleManager: {fileID: 1002212484}
   timer: {fileID: 1749404029}
 --- !u!114 &964576455

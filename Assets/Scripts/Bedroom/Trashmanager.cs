@@ -30,6 +30,11 @@ public class Trashmanager : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI trashCounterText;
 
+    [Header("Clean Popup")]
+    public GameObject cleanPopup;
+    public float popupDelay = 30f;
+    public float popupDuration = 5f;
+
     [Header("Other Systems")]
     public PuddleManager puddleManager;   // drag PuddleManager here
     public Timer timer;                   // drag Timer here
@@ -47,6 +52,34 @@ public class Trashmanager : MonoBehaviour
     private void Start()
     {
         UpdateTrashUI();
+
+        if (cleanPopup != null)
+            cleanPopup.SetActive(false);
+
+            Invoke(nameof(ShowCleanPopup), popupDelay);
+    }
+
+    /// <summary>
+    /// Shows the clean popup after a delay if trash is not yet completed.
+    /// </summary>
+    void ShowCleanPopup()
+    {
+        if (!trashCompleted && cleanPopup != null)  // Check if popup is assigned and trash not completed
+        {
+            cleanPopup.SetActive(true);
+
+            // Automatically hide after duration
+            Invoke(nameof(HideCleanPopup), popupDuration);
+        }
+    }
+
+    /// <summary>
+    /// Hides the clean popup after showing it for a set duration.
+    /// </summary>
+    void HideCleanPopup()
+    {
+        if (cleanPopup != null)
+            cleanPopup.SetActive(false);
     }
 
     /// <summary>
